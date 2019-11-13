@@ -1,0 +1,146 @@
+#wrapper
+{	
+	display: grid;
+	grid-template-areas:
+	'logo   header header header'
+    'leftSide topBar topBar rightSide'
+    'leftSide   main   main  rightSide'
+    'footer footer footer footer';
+}
+
+#header  
+{ 
+	grid-area: header;
+	background-color: #c42525;
+	background: linear-gradient(to bottom, #bfbfbf 0%, #ffffff 100%);
+}
+
+#header h1, h3  
+{ 
+	font-size: 250%;
+	margin-left: 15px;
+	color: #990000;
+}
+
+#leftSide 
+{ 
+	grid-area: leftSide;
+	list-style-type: none;
+	width: 300px;
+}
+
+#content
+{
+	grid-area: main;
+	margin: 0px auto;
+	width: 1200px;
+}
+#contentLogin
+{
+	grid-area: main;
+	margin: 0px auto;
+	width: 1200px;
+	height: 800px;
+}
+
+#topBar
+{
+	width: 1200px;
+	margin: 0px auto;
+	grid-area: topBar;
+	background: linear-gradient(to bottom, #ffffff 0%, #bfbfbf 100%);
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+	grid-column-gap: 5px;
+	align-content: center;
+	justify-content: left;
+	height: 30px;
+}
+
+#Form
+{
+	
+	background: linear-gradient(to bottom, #bfbfbf 0%, #ffffff 100%);
+}
+
+#Form label
+{
+	float: left;
+	width: 200px;
+	padding: 0px;
+}
+
+#Form ul li
+{
+	list-style:none;
+	color: #261a0d;
+}
+
+#rightSide
+{
+	grid-area: rightSide;
+	list-style-type: none;
+	width: 300px;
+}
+
+#rightSide a
+{
+	background: linear-gradient(to bottom, #ffffff 0%, #bfbfbf 100%);
+	text-decoration: none;
+	color: #000000;
+	text-align: center;
+	text-decoration: none;  
+	display: list-item;
+	padding: 6px;
+	margin: 0px;
+	font-weight: bold;
+	list-style-type: none;
+}
+
+#rightSide a:hover
+{
+	color: #990000;
+}
+
+.innerFieldset
+{
+	border: none;
+}
+
+#buyOrSell label
+{
+	float: none;
+}
+
+#logoBox
+{
+	grid-area: logo;
+	background: linear-gradient(to bottom, #bfbfbf 0%, #ffffff 100%);
+}
+
+#footer  
+{ 
+	grid-area: footer;
+	display: grid;
+	grid-template-columns: 50% 50%;
+	align-content: center;
+	justify-content: center;
+	text-align: center;
+	text-decoration: none;
+	color: #000000;
+	list-style-type: none;
+	background: linear-gradient(to bottom, #ffffff 0%, #bfbfbf 100%);
+}
+
+#footer div
+{ 
+	text-decoration: none;
+	color: #000000;
+	margin-top:  10px;
+}
+
+#footer div li a
+{ 
+	text-decoration: none;
+	color: #000000;
+}

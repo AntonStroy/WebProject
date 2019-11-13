@@ -1,0 +1,120 @@
+#wrapper
+{	
+	display: grid;
+	grid-template-areas:
+	'logo   header header header header'
+    'topBar topBar topBar topBar topBar'
+    'main   main   main   main   main'
+    'footer footer footer footer footer';
+}
+
+#header  
+{ 
+	grid-area: header;
+	background-color: #c42525;
+	background: linear-gradient(to bottom, #bfbfbf 0%, #ffffff 100%);
+}
+
+#header h1, h3  
+{ 
+	font-size: 250%;
+	margin-left: 15px;
+	color: #990000;
+}
+
+#content 
+{ 
+	
+	grid-area: main;
+	grid-gap: 5px;
+	padding: 5px;
+	margin: 0px auto;
+	width: 1200px;
+}
+
+#content a 
+{ 
+	text-decoration: none;
+	color: #000000; 
+}
+
+.ShortAd
+{
+	border: 1px solid #999999;
+	height: 300px;
+}
+
+.ShortAd:hover 
+{
+  box-shadow: 0px 5px 10px #990000;
+}
+
+.ShortAdImage
+{
+	display: grid;
+	justify-content: center;
+	align-content: center;
+	background-color: white;
+}
+
+.ShortAdImage img 
+{
+  max-width:200px;
+  max-height:150px;
+  width: auto;
+  height: auto;
+  margin: 5px;
+}
+
+.ShortAdDiscription
+{
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+#topBar
+{
+	width: 1200px;
+	margin: 0px auto;
+	grid-area: topBar;
+	background: linear-gradient(to bottom, #ffffff 0%, #bfbfbf 100%);
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+	grid-column-gap: 5px;
+	align-content: center;
+	justify-content: left;
+	height: 30px;
+}
+
+#logoBox
+{
+	grid-area: logo;
+	background: linear-gradient(to bottom, #bfbfbf 0%, #ffffff 100%);
+}
+
+#footer  
+{ 
+	grid-area: footer;
+	display: grid;
+	grid-template-columns: 50% 50%;
+	align-content: center;
+	justify-content: center;
+	text-align: center;
+	text-decoration: none;
+	color: #000000;
+	list-style-type: none;
+	background: linear-gradient(to bottom, #ffffff 0%, #bfbfbf 100%);
+}
+
+#footer div
+{ 
+	text-decoration: none;
+	color: #000000;
+	margin-top:  10px;
+}
+
+#footer div li a
+{ 
+	text-decoration: none;
+	color: #000000;
+}
