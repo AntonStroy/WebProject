@@ -212,8 +212,12 @@
         	<div id="rightSide">
                 <?php if(isset($_SESSION['Login'])): ?>
                     <li><a href="index.php?destroy=true">Sign Out</a></li>
-                    <li><a href="user_ads.php?id=<?= $_SESSION['UserId'] ?>">My adds</a></li>
-                    <li><a href="new_post.php">Post new add</a></li>
+                    <li><a href="user_ads.php?id=<?= $_SESSION['UserId'] ?>">My Adds</a></li>
+                    <li><a href="new_post.php">New Add</a></li>
+                        <?php if($_SESSION['Admin'] == 1): ?>
+                           <li><a href="user_configuration.php">User Configuration</a></li>
+                           <li><a href="category_configuration.php">Category Configuration</a></li> 
+                        <?php endif ?>
                 <?php else: ?>
                    <li><a href="login_form.php">Sign In</a></li>
                 <?php endif ?>          

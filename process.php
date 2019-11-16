@@ -31,7 +31,7 @@
     $itemName    = filter_input(INPUT_POST, 'itemName', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $price       = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
-    $categoryId  = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_NUMBER_INT);
+    $categoryId  = filter_input(INPUT_POST, 'categoryId', FILTER_SANITIZE_NUMBER_INT);
     $buyOrSell   = filter_var($buyOrSell, FILTER_VALIDATE_INT);
 
     // Sanitize the PostId that comes with post method from edit_post page.

@@ -8,7 +8,7 @@
 
   // Using login.php file for user authentication.
   //require 'login.php';
-  include 'connection.php';
+    include 'connection.php';
 
     session_start();
     
@@ -33,7 +33,7 @@
     else
     {
       
-        $query = "SELECT UserId, Login, Password, Admin, 
+        $query = "SELECT UserId, Login, Password, Admin 
                 FROM user 
                 WHERE Login = :login AND Password = :password";
 
@@ -63,6 +63,7 @@
         Echo $_SESSION['Login'];
         Echo $_SESSION['Password'];
         Echo $_SESSION['UserId'];
+        Echo $_SESSION['Admin'];
         header('Location:index.php');
         exit;  
       }
@@ -98,7 +99,7 @@
                     <button type="button">Reset</button>               
               </div>
       
-      <div id="contentLogin">
+      <div id="content">
         <form id="Form" action="login_form.php" method="POST" enctype="multipart/form-data">
           <legend>Login</legend>
             <ul>

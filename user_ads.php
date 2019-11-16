@@ -78,7 +78,7 @@
         	
       <div id="topBar">
         <a href="index.php">Main</a>  
-        <a href="new_post.php">New Post</a>       
+        <a href="new_post.php">New Add</a>       
       </div>
 
       <div id="content">

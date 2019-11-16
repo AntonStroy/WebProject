@@ -33,8 +33,8 @@ session_start();
         	
         			<div id="topBar">
                 		<a href="index.php">Main</a>
-                		<a href="user_ads.php?id=1">My adds</a>  
-                		<button type="submit" form="Form" name="command" value="Create">Post</button> 
+                		<a href="user_ads.php?id=1">My Adds</a>  
+                		<button type="submit" form="Form" name="command" value="Create">My Adds</button> 
                 		<button type="button">Reset</button>      		     
         			</div>
 			
@@ -43,8 +43,8 @@ session_start();
 					<legend>New Post</legend>
 						<ul>
 							<li>
-								<label for="category">Choose Category</label>
-								<select name="category" id="category">
+								<label for="categoryId">Choose Category</label>
+								<select name="categoryId" id="categoryId">
     								<option value="0">- category -</option>
     								<option value="7">BabyItems</option>
     								<option value="6">Books</option>

@@ -64,7 +64,7 @@
         	
         			<div id="topBar">
                 		<a href="index.php">Main</a>
-                        <a href="user_ads.php?id=1">My adds</a>
+                        <a href="user_ads.php?id=1">My Adds</a>
                 		<button type="submit" form="Form" name="command" value="Update">Update</button>
                     <button type="submit" form="Form" name="command" value="Delete">Delete</button> 
                 		<button type="button">Reset</button>     		       
