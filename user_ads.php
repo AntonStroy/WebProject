@@ -66,69 +66,67 @@
 	</head>
 
 	<body>
-    	<div id="wrapper">
-        	<div id="header">
-            	<h1>S o l d   O u t</h1>
-            	<h3>Best Canadian online classified advertising service</h3>
-        	</div>
+    <div id="wrapper">
+      <div id="header">
+        <h1>S o l d   O u t</h1>
+        <h3>Best Canadian online classified advertising service</h3>
+      </div>
 
-        	<div id="logoBox">
-        		<img src="images\Sold_Out.png" alt="logo sold out" height="150px" width="150px" >
-        	</div>
+      <div id="logoBox">
+        	<img src="images\Sold_Out.png" alt="logo sold out" height="150px" width="150px" >
+      </div>
         	
-        	<div id="content">
-        			<div id="topBar">
-                		<a href="index.php">Main</a>  
-                		<a href="new_post.php">Post new add</a>       
-        			</div>
+      <div id="topBar">
+        <a href="index.php">Main</a>  
+        <a href="new_post.php">New Post</a>       
+      </div>
 
-        		<?php if($error_flag): ?>
-                    <p>There are no posts, please check other category</p>
-                <?php endif ?>
+      <div id="content">
+        <?php if($error_flag): ?>
+          <p>There are no posts, please check other category</p>
+        <?php endif ?>
         
-                <?php if($print_flag): ?>
-                    <?php foreach($adPosts as $adPost): ?>    
-                       
-
-                        <a target="_blank" href="full_post.php">
-
-                        <div class="ShortAd">
-                            <div class="ShortAdImage">
-                                <img src="<?= $adPost['ImageLocation'] ?>" alt="advertisement">
-                            </div>
+        <?php if($print_flag): ?>
+          <?php foreach($adPosts as $adPost): ?>    
+            <div class="ShortAd">
+              <div class="ShortAdImage">
+                <img src="<?= $adPost['ImageLocation'] ?>" alt="advertisement">
+              </div>
+            
+              <div class="ShortAdDiscription">
+                <p>Posted on <?= date('F d, Y', strtotime($adPost['PostDate'])) ?></p>
+                <p><strong><?= $adPost['Name'] ?></strong></p>
+                <p style="color:red;">$<?= $adPost['Price'] ?></p>               
+              </div>
                             
-                            <div class="ShortAdDiscription">
-                                <p>Posted on <?= date('F d, Y', strtotime($adPost['PostDate'])) ?></p>
-                                <p><strong><?= $adPost['Name'] ?></strong></p>
-                                <p style="color:red;">$<?= $adPost['Price'] ?></p>
-                            </div>
+              <div class = "links">
+                <a href="edit_post.php?PostId=<?= $adPost['PostId'] ?>">Edit</a>
+                <a href="full_post.php?PostId=<?= $adPost['PostId'] ?>">Full Details</a>
+                <a href="process.php?PostId=<?= $adPost['PostId'] ?>">Delete</a>
+                <input type="hidden" name="PostId" value="<?= $PostId ?>" /> 
+              </div>
+            </div> 
+          <?php endforeach ?> 
+        <?php endif ?> 
+      </div>
 
-                            <a href="edit_post.php?PostId=<?= $adPost['PostId'] ?>">Edit</a>
-                            <!--<a href="process.php?PostId=<?= $adPost['PostId'] ?>">Delete</a>-->
-                            <button type="submit" name="command" value="Delete">Delete</button>
-                            <input type="hidden" name="PostId" value="<?= $PostId ?>" />
-                        </div> 
-                        </a>      
-                    <?php endforeach ?> 
-                <?php endif ?> 
-                
-        	</div>
-	
-        	<div id="footer">
-                <ul>
-                    <li><a href="#">Terms of Use</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Posting Policy</a></li>
-                    <li><a href="#">Support</a></li>
-                </ul>
-                <ul>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Member Benefits</a></li>
-                    <li><a href="#">Advertise on SoldOut</a></li>
-                </ul>
-                <p>copyright &copy; all rights reserved</p>
-        	</div>
-    	</div>
+      <div id="footer">
+        <ul>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Posting Policy</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
+        
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Member Benefits</a></li>
+          <li><a href="#">Advertise on SoldOut</a></li>
+          <p>copyright &copy; all rights reserved</p>
+        </ul>
+
+      </div>
+    </div>
 	</body>
 </html>

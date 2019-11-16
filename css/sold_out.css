@@ -47,7 +47,6 @@
 #leftSide a
 {
 	background: linear-gradient(to bottom, #ffffff 0%, #bfbfbf 100%);
-	text-decoration: none;
 	color: #000000;
 	text-align: center;
 	text-decoration: none;  
@@ -73,6 +72,24 @@
 	justify-content: left;
 	height: 30px;
 	padding-left: 5px;
+}
+
+#topBar form a
+{
+	color: #000000;
+	text-align: center;
+	text-decoration: none; 
+	padding-right: 5px;
+	padding-left: 5px;
+	margin: 0px;
+	border: 1px solid #bfbfbf; 
+}
+
+
+
+#topBar form a:hover
+{
+	color: #990000;
 }
 
 #content 

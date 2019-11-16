@@ -16,9 +16,6 @@
     $errorMessage = '';
     $user = null;
 
-    
-
-
   if(isset($_POST['command']))
   {
 
@@ -36,7 +33,7 @@
     else
     {
       
-        $query = "SELECT UserId, Login, Password  
+        $query = "SELECT UserId, Login, Password, Admin, 
                 FROM user 
                 WHERE Login = :login AND Password = :password";
 
@@ -58,10 +55,10 @@
       else
       { 
 
+        $_SESSION['UserId'] = $user[0][0];
         $_SESSION['Login'] = $user[0][1];
         $_SESSION['Password'] = $user[0][2];
-        $_SESSION['UserId'] = $user[0][0];
-        
+        $_SESSION['Admin'] = $user[0][3];
 
         Echo $_SESSION['Login'];
         Echo $_SESSION['Password'];

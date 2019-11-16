@@ -58,24 +58,23 @@
         }
 
     }*/
+    
+    // Selecting categories to create a dynamic category list
     $categories = "SELECT CategoryId, CategoryName
                 FROM category
                 ORDER BY CategoryName";
 
     $statement = $db->prepare($categories);
-
     $statement->execute();
-
     $categories = $statement->fetchall();  
 
-
-
+    // Part of the code to sort the post set the $sort variable to the one of the sort strings Date, Price or Name
     $sort = 'PostDate';
-
     if(isset($_GET['sort']))
     {
         $sort = $_GET['sort'];
     }
+    
     
     // Variables flags for empty data and printing
     $error_flag = False;
@@ -87,9 +86,7 @@
     {
         return filter_input(INPUT_GET, 'category', FILTER_VALIDATE_INT) && ($_GET['category'] <= 10 && $_GET['category'] > 1);
     }
-
-
-    
+  
    if(isset($_GET['category']))
     {
         $categoryId = $_GET['category'];
@@ -110,12 +107,11 @@
     }
 
     $statement = $db->prepare($query);
-
     $statement->execute();
-
     $adPosts = $statement->fetchall();
     
-  if($adPosts == null)
+    
+    if($adPosts == null)
     {
         $error_flag = True;
     }
@@ -123,8 +119,6 @@
     {
         $print_flag = True;
     }
-
-
 
 ?>
 
@@ -161,7 +155,8 @@
                 <a href="index.php?sort=PostDate">Date</a>
 
                  
-        		<!--  <label for="priceSort">Price</label>
+        		<!--Sorting mechanism complicated disabled for now another one used instead-->
+                <!--  <label for="priceSort">Price</label>
         		 <select name="priceSort" id="priceSort">
                  	<option value="lowToHigh">Low to High</option>
                     <option value="highToLow">High to Low</option>
@@ -224,7 +219,7 @@
                 <?php endif ?>          
                     <li><a href="registration.php">Register</a></li>
                 
-        		<img src="images\vocation.jpg" alt="chocolate bar add" >
+        		<img src="images\vocation.jpg" alt="Vacation Advertisement" >
         	</div>
 
         	<div id="footer">
