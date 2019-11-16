@@ -21,7 +21,7 @@ session_start();
 
 	<body>
     	<div id="wrapper">
-        	<div id="header">
+        <div id="header">
             	<h1>S o l d   O u t</h1>
             	<h3>Best Canadian online classified advertising service</h3>
         	</div>
@@ -31,12 +31,12 @@ session_start();
         	</div>
         	
         	
-        			<div id="topBar">
-                		<a href="index.php">Main</a>
-                		<a href="user_ads.php?id=1">My Adds</a>  
-                		<button type="submit" form="Form" name="command" value="Create">My Adds</button> 
-                		<button type="button">Reset</button>      		     
-        			</div>
+        	<div id="topBar">
+                <a href="index.php">Main</a>
+              	<a href="user_ads.php?id=1">My Adds</a>  
+                <button type="submit" form="Form" name="command" value="Create">Post</button> 
+                <button type="button">Reset</button>      		     
+        	</div>
 			
 			<div id="content">
 				<form id="Form" action="process.php" method="POST" enctype="multipart/form-data">
@@ -44,18 +44,12 @@ session_start();
 						<ul>
 							<li>
 								<label for="categoryId">Choose Category</label>
-								<select name="categoryId" id="categoryId">
-    								<option value="0">- category -</option>
-    								<option value="7">BabyItems</option>
-    								<option value="6">Books</option>
-    								<option value="3">Cars</option>
-    								<option value="9">Clothing</option>
-    								<option value="1">Electronics</option>
-    								<option value="4">Furniture</option>
-    								<option value="5">Hobbies</option>
-    								<option value="8">Home Appliances</option>
-    								<option value="10">Pets</option>
-    								<option value="2">Toys</option>
+									<select name="categoryId" id="categoryId">
+										<option value="0">- category -</option>
+									
+										<?php foreach ($categories as $category): ?>
+                    						<option value="6"><?= $category['CategoryName'] ?></option>
+                    				<?php endforeach ?>
   								</select>
   								<p class="categoryError error" id="category_error">* Required field</p>
 							</li>

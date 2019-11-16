@@ -176,7 +176,7 @@
                 <input id="searchbox" type="text" />
                 <button type="button">Search</button>
                 <?php if(isset($_SESSION['Login'])): ?>
-                   <span><?= $_SESSION['Login'] ?></span>
+                   <?= $_SESSION['Login'] ?>
                 <?php endif ?> 
                        
             </form>

@@ -67,13 +67,6 @@
 	background: linear-gradient(to bottom, #bfbfbf 0%, #ffffff 100%);
 }
 
-#Form label
-{
-	float: left;
-	width: 200px;
-	padding: 0px;
-}
-
 #Form ul
 {
 	margin: 0px;
@@ -81,9 +74,22 @@
 
 #Form ul li
 {
-	list-style:none;
-	color: #261a0d;
-	margin: 5px;
+	list-style: none;
+	padding: 5px;
+	margin: 10px;
+}
+
+#Form ul li:hover
+{
+	background-color: #bfbfbf;
+}
+
+#Form ul li a
+{
+	color: #000000;
+	text-align: center;
+	text-decoration: none; 
+	padding: 5px;
 }
 
 #logoBox
