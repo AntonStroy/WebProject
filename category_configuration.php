@@ -26,59 +26,72 @@
 
 //--------------------------------------------------------------------------------------//
   
-  if(isset($_POST['command']))
-  {
-    
-      if($_POST['command'] === 'Select')
-      {
-        $_SESSION['CategoryId'] =  $_POST['categorySelect'];
-        $id = $_SESSION['CategoryId'];
-
-        $query = "SELECT CategoryId, CategoryName
-                FROM category
-                WHERE categoryId = $id";
-  
-          $statement = $db->prepare($query);
-          $statement->execute(); 
-          $display = $statement->fetchAll(); 
-      }
-
     $create_flag = False;
     $update_flag = False;
     $delete_flag = False;
     $Error_flag  = False;
+    $flag = '';
+
+  if(isset($_POST['command']))
+  {
+    if($_POST['command'] === 'Select')
+    {   
+        if($_POST['categorySelect'] == 0)
+        {
+          $flag = 'hide';
+        }
+        else
+        {
+          $flag = 'show';
+          $_SESSION['CategoryId'] =  $_POST['categorySelect'];
+          $id = $_SESSION['CategoryId'];
+
+          $query = "SELECT CategoryId, CategoryName
+                FROM category
+                WHERE CATEGORYID = $id";
+  
+          $statement = $db->prepare($query);
+          $statement->execute(); 
+          $display = $statement->fetchAll();
+        }       
+    }
 
     // Sanitize user input to escape HTML entities and filter out dangerous characters.
     $newCategory = filter_input(INPUT_POST, 'newCategory', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $categoryId = filter_input(INPUT_POST, 'categoryId', FILTER_SANITIZE_NUMBER_INT);
     
-
-    // Checking for empty  name is over 70 characters. 
-    if($_POST['category'] === '' ||  strlen($category) > 70 || strlen($newCategory) > 70)
-    {
-      $Error_flag = True; 
-    }
-
-    // Process block
-    if(!$Error_flag)   
-    {       
-      
-      // Else If block to determine which command need to be used create, update or delete.
-      if($_POST['command'] === 'Create')
+    if($_POST['command'] === 'Create')
       {
+        if($_POST['newCategory'] === '' ||  strlen($newCategory) > 70)
+        {
+          $Error_flag = True; 
+        }
+
+        if(!$Error_flag)
+        {
+          $query = "INSERT INTO category (CATEGORYNAME) values (:newCategory)";
         
-        $query = "INSERT INTO category (CATEGORYNAME) values (:newCategory)";
-        
-        $statement = $db->prepare($query);
-        $statement->bindValue(':newCategory', $newCategory);
-        $statement->execute();
-        $insert_id = $db->lastInsertId();       
+          $statement = $db->prepare($query);
+          $statement->bindValue(':newCategory', $newCategory);
+          $statement->execute();
+          $insert_id = $db->lastInsertId();
+          header('Location: category_configuration.php');
+        }      
       }
-      
-      
-      elseif($_POST['command'] === 'Update')
+
+      // Checking for empty  name is over 70 characters. 
+      if($_POST['category'] === '' ||  strlen($category) > 70)
       {
+        $Error_flag = True; 
+      }
+
+      // Process block
+      if(!$Error_flag)   
+      {       
+
+        if($_POST['command'] === 'Update')
+        {
             $query = "UPDATE category SET CATEGORYNAME = :category WHERE CATEGORYID = :categoryId";
            
             $statement = $db->prepare($query);
@@ -87,18 +100,15 @@
             $statement->bindValue(':categoryId', $categoryId, PDO::PARAM_INT);
             $statement->execute();
             header('Location: category_configuration.php');
-      }
-      elseif($_POST['command'] === 'Delete')
-      {
+        }
+        elseif($_POST['command'] === 'Delete')
+        {
         $query = "DELETE FROM category WHERE CATEGORYID = :categoryId";
         $statement = $db->prepare($query);
         $statement->bindValue(':categoryId', $categoryId, PDO::PARAM_INT);
-        $statement->execute();   
-        header('Location: category_configuration.php');
+        $statement->execute();
+        header('Location: category_configuration.php');       
       }
-               
-      // refresh
-    
     }
   }
 ?>
@@ -147,14 +157,17 @@
             </li>
               
             <li>
-              
-                  <input type="text" name="category" value="<?= $display[0][1] ?>" />
-                  <input type="hidden" name="categoryId" value="<?= $display[0][0] ?>" />
-               
-              
-              <button type="submit" name="command" form="Form" value="Update">Update</button>
-              <button type="submit" name="command" form="Form" value="Delete">Delete</button>
-            </li>     
+              <?php if($flag == 'show'): ?>
+                <input type="text" name="category" value="<?= $display[0][1] ?>" />
+                <input type="hidden" name="categoryId" value="<?= $display[0][0] ?>" /> 
+                <button type="submit" name="command" form="Form" value="Update">Update</button>
+                <button type="submit" name="command" form="Form" value="Delete">Delete</button>
+                <?php else: ?>
+                <input type="text" name="category" value="" />
+                <button type="submit" name="command" form="Form" value="Update">Update</button>
+                <button type="submit" name="command" form="Form" value="Delete">Delete</button>
+              <?php endif ?>
+            </li>  
           </ul>
         </form>
       </div>
