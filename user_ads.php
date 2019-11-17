@@ -83,7 +83,7 @@
 
       <div id="content">
         <?php if($error_flag): ?>
-          <p>There are no posts, please check other category</p>
+          <p>You dont have any posts</p>
         <?php endif ?>
         
         <?php if($print_flag): ?>

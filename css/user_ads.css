@@ -28,7 +28,8 @@
 	grid-gap: 5px;
 	padding: 5px;
 	margin: 0px auto;
-	width: 1200px;
+	min-height: 800px;
+	min-width: 1300px;
 }
 
 .ShortAd
@@ -86,7 +87,7 @@
 #topBar
 {
 	background: linear-gradient(to bottom, #ffffff 0%, #bfbfbf 100%);
-	width: 1200px;
+	min-width: 1300px;
 	margin: 0px auto;
 	grid-area: topBar;
 	display: grid;

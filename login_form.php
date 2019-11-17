@@ -94,7 +94,8 @@
           
               <div id="topBar">
                     <a href="index.php">Main</a>
-                    <a href="registration.php">Register</a>  
+                    <a href="registration.php">Register</a>
+                    <a href="#">Restore Password</a>  
                     <button type="submit" form="Form" name="command" value="login">Login</button> 
                     <button type="button">Reset</button>               
               </div>
@@ -119,8 +120,6 @@
               <?php if($errorFlag) :?>
                 <p><?= $errorMessage ?></p>
               <?php endif ?>
-              
-              <a href="#">Forgot your password?</a>
         </form>
           </div>
   

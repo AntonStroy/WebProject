@@ -99,7 +99,8 @@
 	grid-area: main;
 	grid-gap: 5px;
 	padding: 5px;
-	
+	min-height: 800px;
+	min-width: 1300px;	
 }
 
 #content a 

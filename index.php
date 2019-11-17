@@ -145,6 +145,7 @@
                 <?php foreach ($categories as $category): ?>
                     <li><a href="index.php?category=<?= $category['CategoryId'] ?>"><?= $category['CategoryName'] ?></a></li>
         	   <?php endforeach ?>
+               <img src="images\SocialAdd.png" alt="Wine Advertisement" >
             </div>
 
         	<div id="topBar" >
@@ -175,9 +176,7 @@
 
                 <input id="searchbox" type="text" />
                 <button type="button">Search</button>
-                <?php if(isset($_SESSION['Login'])): ?>
-                   <?= $_SESSION['Login'] ?>
-                <?php endif ?> 
+                
                        
             </form>
             </div>
@@ -221,8 +220,11 @@
                 <?php else: ?>
                    <li><a href="login_form.php">Sign In</a></li>
                 <?php endif ?>          
-                    <li><a href="registration.php">Register</a></li>
-                
+                    <?php if(isset($_SESSION['Login'])): ?>
+                        <li><a href="index.php"><?= $_SESSION['Login'] ?></a></li>                        
+                    <?php else: ?>
+                        <li><a href="registration.php">Register</a></li>
+                    <?php endif ?>
         		<img src="images\vocation.jpg" alt="Vacation Advertisement" >
         	</div>
 

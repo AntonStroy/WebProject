@@ -162,7 +162,7 @@
 								<li>
 									<label for="province">Province</label>
 									<select id="province" name="province">
-										<option value=""></option>
+										<option value="0">Province</option>
 										<option value="AB">Alberta</option>
 										<option value="BC">British Columbia</option>
 										<option value="MB">Manitoba</option>

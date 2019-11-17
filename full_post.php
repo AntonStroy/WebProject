@@ -82,8 +82,8 @@
 <?php foreach($info as $currentInfo): ?>
         			<div id="topBar">
                 		<a href="index.php">Main</a>
-                		
-                		 		     
+                    <a href="user_ads.php?id=<?= $_SESSION['UserId'] ?>">My Adds</a>
+                    <a href="new_post.php">New Add</a>              		 		     
         			</div>
 
         	<div id="leftSide">
@@ -107,10 +107,8 @@
 	  <div id="rightSide">
                 <?php if(isset($_SESSION['Login'])): ?>
                     <li><a href="index.php?destroy=true">Sign Out</a></li>
-                    <li><a href="user_ads.php?id=<?= $_SESSION['UserId'] ?>">My adds</a></li>
-                    <li><a href="new_post.php">Post new add</a></li>
                 <?php endif ?>       
-        		<img src="images\vocation.jpg" alt="chocolate bar add" >
+        		<img src="images\flight.jpg" alt="Airlines advertisement" >
 
         		<p>Seller: <?= $currentInfo['FirstName'] ?> <?= $currentInfo['LastName'] ?></p>
          		<p>Item Location: <?= $currentInfo['Address'] ?></p>
