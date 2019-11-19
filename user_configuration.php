@@ -6,13 +6,13 @@
  *  Purpose:                      *
  **********************************/
 
-  // Using login.php file for user authentication.
-  //require 'login.php';
+  // using authentication.php file for user authentication.
+	require 'login.php';
   
   // Using connection.php file to connect to the data base.
   include 'connection.php';
   
-  session_start();
+
 
   // Build a query using ":id" as a placeholder parameter.
   $query = "SELECT FirstName, LastName, UserId

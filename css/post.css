@@ -29,6 +29,23 @@
 	width: 300px;
 }
 
+.comment 
+{ 
+	background: linear-gradient(to bottom, #ffffff 0%, #bfbfbf 100%);
+	border: 1px solid #bfbfbf;
+	padding: 10px;
+	margin: 5px;
+	box-shadow: 0px 3px 5px #5f4121;
+	border-radius: 25px;
+	
+}
+
+.comment p
+{ 
+	margin: 0px;
+
+}
+
 #content
 {
 	grid-area: main;
@@ -36,6 +53,7 @@
 	min-height: 800px;
 	min-width: 1300px;
 }
+
 /*#contentLogin
 {
 	grid-area: main;

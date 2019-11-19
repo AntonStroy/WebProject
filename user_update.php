@@ -6,8 +6,9 @@
  *  Purpose:                      *
  **********************************/
 
-	// Using connection.php file to connect to the data base.
-	include 'connection.php';
+
+// Using connection.php file to connect to the data base.
+include 'connection.php';
 
 //------------------------SELECT BLOCK----------------------------------------
 	if(isset($_GET['userId']))
@@ -61,23 +62,24 @@
     		$city       = filter_input(INPUT_POST, 'city',       FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     		$province   = filter_input(INPUT_POST, 'province', 	 FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     		$postalCode = filter_input(INPUT_POST, 'postalCode', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
+    		$admin = 0;
 
 		if($_POST['password'] != $_POST['confirmPassword'])
 		{
 			$errorFlag = True;
 		}
 
-		$admin = 0;
+		
 
 		if($_POST['command'] === "Update")
 		{
 			if(!$errorFlag)
 			{
-    			$query = "UPDATE user SET USERID = :userId,  FIRSTNAME = :firstName, LASTNAME = :lastName, LOGIN = :login, PASSWORD = :password, PHONENUM = :phone, EMAIL = :email, ADDRESS = :address, CITY = :city, PROVINCE = :province, POSTALCODE = :postalCode, ADMIN = :admin WHERE USERID = :userId";		
+    			$query = "UPDATE user SET FIRSTNAME = :firstName, LASTNAME = :lastName, LOGIN = :login, PASSWORD = :password, PHONENUM = :phone, EMAIL = :email, ADDRESS = :address, CITY = :city, PROVINCE = :province, POSTALCODE = :postalCode, ADMIN = :admin WHERE USERID = :userId";		
+					$update_flag = True;
 			}
 
-			$update_flag = True;
+			
     	}
 
 		if($_POST['command'] === "Delete")
@@ -108,14 +110,17 @@
             
             if($update_flag || $delete_flag)
             {
-            	$statement->bindValue(':userId', $userId, PDO::PARAM_INT);  
+            	$statement->bindValue(':userId', $userId, PDO::PARAM_INT);
+    			$statement->execute();  
         	}
     		
-    		// Execution of the binds
-    		$statement->execute();
+    		
       
-    		// return to index page 
-    		header('Location: user_configuration.php');
+    		if(!$errorFlag)
+    		{
+    			header('Location: user_configuration.php');
+    		}
+    		
 	}
 	
 ?>
@@ -149,7 +154,7 @@
         	</div>
 			
 			<div id="content">
-				<form id="Form" action="user_update.php" method="POST" enctype="multipart/form-data">
+				<form id="Form" action="user_update.php" method="POST" enctype="multipart/form-data">			 
 					<legend>User details Configuration</legend>
 					<?php if($errorFlag): ?>
 						<p>Wrong Password</p>	
@@ -157,13 +162,7 @@
 
 					<ul>
 					<?php foreach($userInfo as $info): ?>
-						<li>
-							<label for="userId">User ID</label>
-							<input type="number" name="userId" id="userId" value="<?= $info['USERID'] ?>"/>
-							<p class="personalError error" id="userId_error">* Required field</p>
-						</li>
-
-
+						<input type="hidden" name="userId" value="<?= $info['USERID'] ?>" />
 						<li>
 							<label for="firstName">First name</label>
 							<input type="text" name="firstName" id="firstName" value="<?= $info['FIRSTNAME'] ?>"/>

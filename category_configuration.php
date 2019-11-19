@@ -7,12 +7,10 @@
  **********************************/
 
   // Using login.php file for user authentication.
-  //require 'login.php';
+  require 'login.php';
   
   // Using connection.php file to connect to the data base.
   include 'connection.php';
-  
-  session_start();
 
   // Build a query using ":id" as a placeholder parameter.
   $query = "SELECT CategoryId, CategoryName
@@ -138,11 +136,11 @@
       </div>
 
       <div id="content">
-        <form id="Form" action="category_configuration.php" method="POST" enctype="multipart/form-data">
+        <form id="CategoryForm" action="category_configuration.php" method="POST" enctype="multipart/form-data">
           <ul>    
             <li>
               <input type="text" name="newCategory" id="newCategory" />
-              <button type="submit" form="Form" name="command" value="Create">Add New</button>
+              <button type="submit" form="CategoryForm" name="command" value="Create">Add New</button>
             </li>
             
             <li>
@@ -153,19 +151,19 @@
                     <option value="<?= $current['CategoryId'] ?>"><?= $current['CategoryName'] ?></option>  
 				          <?php endforeach ?>
               </select>
-              <button type="submit" name="command" form="Form" value="Select">Select</button>
+              <button type="submit" name="command" form="CategoryForm" value="Select">Select</button>
             </li>
               
             <li>
               <?php if($flag == 'show'): ?>
                 <input type="text" name="category" value="<?= $display[0][1] ?>" />
                 <input type="hidden" name="categoryId" value="<?= $display[0][0] ?>" /> 
-                <button type="submit" name="command" form="Form" value="Update">Update</button>
-                <button type="submit" name="command" form="Form" value="Delete">Delete</button>
+                <button type="submit" name="command" form="CategoryForm" value="Update">Update</button>
+                <button type="submit" name="command" form="CategoryForm" value="Delete">Delete</button>
                 <?php else: ?>
                 <input type="text" name="category" value="" />
-                <button type="submit" name="command" form="Form" value="Update">Update</button>
-                <button type="submit" name="command" form="Form" value="Delete">Delete</button>
+                <button type="submit" name="command" form="CategoryForm" value="Update">Update</button>
+                <button type="submit" name="command" form="CategoryForm" value="Delete">Delete</button>
               <?php endif ?>
             </li>  
           </ul>

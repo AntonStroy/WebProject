@@ -6,8 +6,6 @@
  *  Purpose:                      *
  **********************************/
 
-  // Using login.php file for user authentication.
-  //require 'login.php';
     include 'connection.php';
 
     session_start();
@@ -18,9 +16,6 @@
 
   if(isset($_POST['command']))
   {
-
-    echo $_POST['login'];
-    echo $_POST['password'];
 
     $login    = filter_input(INPUT_POST, 'login', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -60,10 +55,6 @@
         $_SESSION['Password'] = $user[0][2];
         $_SESSION['Admin'] = $user[0][3];
 
-        Echo $_SESSION['Login'];
-        Echo $_SESSION['Password'];
-        Echo $_SESSION['UserId'];
-        Echo $_SESSION['Admin'];
         header('Location:index.php');
         exit;  
       }

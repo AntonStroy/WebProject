@@ -6,6 +6,8 @@
  *  Purpose:                      *
  **********************************/
 
+// using authentication.php file for user authentication.
+require 'login.php';
 
 // Include connection from the connect.php file
 include 'connection.php';
@@ -18,9 +20,6 @@ $categories = "SELECT CategoryId, CategoryName
 $statement = $db->prepare($categories);
 $statement->execute();
 $categories = $statement->fetchall();
-
-//require 'login.php';
-session_start();
 
 ?>
 		
@@ -97,7 +96,8 @@ session_start();
 						<label for="uploadFile">Upload Picture</label>
 						<input type="file" name="uploadFile" id="uploadFile">
 					</li>
-
+							
+         				<!-- <input type='submit' name='submit' value='Upload File'> -->
 					<li>
 						<br>
 						<label for="description">Item Description</label>

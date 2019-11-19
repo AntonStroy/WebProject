@@ -7,10 +7,10 @@
  **********************************/
 
   // Using login.php file for user authentication.
-  //require 'login.php';
+  require 'login.php';
   // Using connection.php file to connect to the data base.
   include 'connection.php';
-  session_start();
+
 
   // function for Validation of the input id.
   function valid_Post_id() 

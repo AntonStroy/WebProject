@@ -120,6 +120,7 @@
         $print_flag = True;
     }
 
+
 ?>
 
 <!DOCTYPE html>
@@ -187,11 +188,8 @@
                 <?php endif ?>
         
                 <?php if($print_flag): ?>
-                    <?php foreach($adPosts as $adPost): ?>    
-                       
-
+                    <?php foreach($adPosts as $adPost): ?>
                         <a target="_blank" href="full_post.php?PostId=<?= $adPost['PostId'] ?>">
-
                         <div class="ShortAd">
                             <div class="ShortAdImage">
                                 <img src="<?= $adPost['ImageLocation'] ?>" alt="advertisement">
@@ -229,20 +227,21 @@
         	</div>
 
         	<div id="footer">
-                <div>
-                    <li><a href="#">Terms of Use</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Posting Policy</a></li>
-                    <li><a href="#">Support</a></li>
-                </div>
-                <div>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Member Benefits</a></li>
-                    <li><a href="#">Advertise on SoldOut</a></li>
-                </div>
-                <p>copyright &copy; all rights reserved</p>
-        	</div>
+        <ul>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Posting Policy</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
+        
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Member Benefits</a></li>
+          <li><a href="#">Advertise on SoldOut</a></li>
+          <p>copyright &copy; all rights reserved</p>
+        </ul>
+      </div>
     	</div>
 	</body>
 </html>

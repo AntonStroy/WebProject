@@ -176,22 +176,25 @@
 	align-content: center;
 	justify-content: center;
 	text-align: center;
-	text-decoration: none;
 	color: #000000;
-	list-style-type: none;
 	background: linear-gradient(to bottom, #ffffff 0%, #bfbfbf 100%);
+	list-style: none;
 }
 
-#footer div
+#footer ul
 { 
-	text-decoration: none;
-	color: #000000;
-	margin-top:  10px;
+	list-style-type: none;
 }
 
-#footer div li a
+#footer ul li a
 { 
+	
+	list-style-type: none;
 	text-decoration: none;
 	color: #000000;
+}
 
+#footer ul li a:hover
+{
+	color: #990000;
 }
