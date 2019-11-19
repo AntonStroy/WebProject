@@ -83,13 +83,36 @@
 	padding-left: 5px;
 	margin: 0px;
 	background: linear-gradient(to bottom, #ffffff 0%, #bfbfbf 100%);
-	border: 1px solid #bfbfbf; 
+	border: 1px solid #bfbfbf;
+	font-family: "Verdana" sans-serif; 
 }
 
 #topBar form a:hover
 {
 	color: #990000;
 }
+
+#topBar form button
+{
+	color: #000000;
+	text-align: center;
+	text-decoration: none; 
+	padding-right: 5px;
+	padding-left: 5px;
+	background: linear-gradient(to bottom, #ffffff 0%, #bfbfbf 100%);
+	border: 1px solid #bfbfbf;
+	width: auto;
+	height: 20px;
+	font-family: "Verdana" sans-serif;
+	cursor: pointer;
+
+}
+
+#topBar form button:hover
+{
+	color: #990000;
+}
+
 
 #content 
 { 

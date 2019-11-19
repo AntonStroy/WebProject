@@ -144,8 +144,10 @@
         	
         	<div id="leftSide">
                 <?php foreach ($categories as $category): ?>
+                    
                     <li><a href="index.php?category=<?= $category['CategoryId'] ?>"><?= $category['CategoryName'] ?></a></li>
-        	   <?php endforeach ?>
+        	       
+               <?php endforeach ?>
                <img src="images\SocialAdd.png" alt="Wine Advertisement" >
             </div>
 

@@ -71,7 +71,9 @@
   $query = "SELECT c.Comment, c.CommentDate, u.Login  
               FROM comment c
               JOIN user u ON (u.UserId = c.SenderId)
-              WHERE c.ReceiverId = $receiverId";
+              WHERE c.ReceiverId = $receiverId
+              ORDER BY c.CommentDate DESC";
+
   $statement = $db->prepare($query);
 
   $statement->execute();
