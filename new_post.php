@@ -94,7 +94,7 @@ $categories = $statement->fetchall();
 							
 					<li>
 						<label for="uploadFile">Upload Picture</label>
-						<input type="file" name="uploadFile" id="uploadFile">
+						<input type="file" name="uploadFile" id="uploadFile" value="Upload">
 					</li>
 							
          				<!-- <input type='submit' name='submit' value='Upload File'> -->

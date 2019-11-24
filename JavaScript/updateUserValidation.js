@@ -134,7 +134,7 @@ function validate(e)
 		return false;
 	}
 	
-	alert("successfully registered");
+	alert("successfully Updated");
 	return true;
 }
 
@@ -164,7 +164,7 @@ function resetForm(e)
 		return true;
 	}
 
-	// Prevents the form from resetting
+	// Prevents the form from submitting
 	e.preventDefault();
 	
 	// When using onReset="resetForm()" in markup, returning false would prevent
@@ -172,15 +172,27 @@ function resetForm(e)
 	return false;	
 }
 
+function deleteForm(e)
+{
+	hideErrors();
+
+	errorFlag = true;
+
+	alert("successfully Deleted");
+	return true;
+}
+
+
+
 // Handles the load event of the document
 function load()
 {
+	// Add event listener for the form delete
+	document.getElementById("Form").addEventListener("delete", deleteForm, false);
 	// Add event listener for the form submit
 	document.getElementById("Form").addEventListener("submit", validate, false);
 	// Add event listener for the form reset
 	document.getElementById("Form").addEventListener("reset", resetForm, false);
-	// Add event listener for the form delete
-	document.getElementById("Form").addEventListener("delete", resetForm, false);
 
 	hideErrors()
 }	
