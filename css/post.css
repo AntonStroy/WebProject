@@ -130,6 +130,12 @@
 {
 	list-style:none;
 	color: #261a0d;
+	margin: 10px;
+}
+
+.personalError
+{
+	color: red;
 }
 
 #rightSide

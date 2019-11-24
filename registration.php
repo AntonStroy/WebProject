@@ -36,8 +36,6 @@
 
     		$query = "INSERT INTO user (FIRSTNAME, LASTNAME, LOGIN, PASSWORD, PHONENUM, EMAIL, ADDRESS, CITY, PROVINCE, POSTALCODE, ADMIN) values (:firstName, :lastName, :login, :password, :phone, :email, :address, :city, :province, :postalCode, :admin)"; 
     	 
-		
-
 			$statement = $db->prepare($query);
             
             $statement->bindValue(':firstName', $firstName);
@@ -74,6 +72,7 @@
     	<meta charset="UTF-8">
     	<title>SoldOut Sell all your staff</title>
     	<link rel="stylesheet" type="text/css" href="css/post.css">
+    	<script src="JavaScript/registrationValidation.js" type="text/javascript"></script>
 	</head>
 
 	<body>
@@ -88,12 +87,12 @@
         	</div>
         	
         	
-        			<div id="topBar">
-                		<a href="index.php">Main</a>  
-                		<button type="submit" form="Form" name="command" value="Register">Register</button> 
-                		<button type="button">Reset</button>      		     
+        		<div id="topBar">
+                	<a href="index.php">Main</a>  
+                <button type="submit" id="submit" form="Form" name="command" value="Register" class="buttonStyle">Register</button> 
+                	<button type="reset"  id="reset" form="Form" name="reset" class="buttonStyle">Reset</button>      		     
         			</div>
-			
+
 			<div id="content">
 				<form id="Form" action="Registration.php" method="POST" enctype="multipart/form-data">
 					<legend>New User Registration</legend>
@@ -105,13 +104,13 @@
 							<li>
 									<label for="firstName">First name</label>
 									<input type="text" name="firstName" id="firstName" />
-									<p class="personalError error" id="first_error">* Required field</p>
+									<p class="personalError error" id="firstName_error">* Required field</p>
 								</li>
 							
 								<li>
 									<label for="lastName">Last name</label>
 									<input type="text" name="lastName" id="lastName" />
-									<p class="personalError error" id="last_error">* Required field</p>
+									<p class="personalError error" id="lastName_error">* Required field</p>
 								</li>
    
 
@@ -183,7 +182,7 @@
 								<li>
 									<label for="postalCode">Postal Code</label>
 									<input id="postalCode" name="postalCode" type="text" />
-									<p class="personalError error" id="postal_error">* Required field</p>
+									<p class="personalError error" id="postalCode_error">* Required field</p>
 									<p class="personalError error" id="postalformat_error">* Invalid postal code</p>
 								</li>					
 					</ul>

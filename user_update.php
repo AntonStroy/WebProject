@@ -131,6 +131,7 @@ include 'connection.php';
     	<meta charset="UTF-8">
     	<title>SoldOut Sell all your staff</title>
     	<link rel="stylesheet" type="text/css" href="css/post.css">
+      <script src="JavaScript/registrationValidation.js" type="text/javascript"></script>
 	</head>
 
 	<body>
@@ -150,7 +151,7 @@ include 'connection.php';
                 <a href="user_configuration.php">Users List</a> 
                 <button type="submit" form="Form" name="command" value="Update">Update</button>
                 <button type="submit" form="Form" name="command" value="Delete">Delete</button> 
-                <button type="button">Reset</button>   		     
+                <button type="reset"  id="reset" form="Form" name="reset" class="buttonStyle">Reset</button>   		     
         	</div>
 			
 			<div id="content">
@@ -166,13 +167,13 @@ include 'connection.php';
 						<li>
 							<label for="firstName">First name</label>
 							<input type="text" name="firstName" id="firstName" value="<?= $info['FIRSTNAME'] ?>"/>
-							<p class="personalError error" id="first_error">* Required field</p>
+							<p class="personalError error" id="firstName_error">* Required field</p>
 						</li>
 							
 						<li>
 							<label for="lastName">Last name</label>
 							<input type="text" name="lastName" id="lastName" value="<?= $info['LASTNAME'] ?>"/>
-							<p class="personalError error" id="last_error">* Required field</p>
+							<p class="personalError error" id="lastName_error">* Required field</p>
 						</li>
    
 
@@ -244,7 +245,7 @@ include 'connection.php';
 						<li>
 							<label for="postalCode">Postal Code</label>
 							<input id="postalCode" name="postalCode" type="text" value="<?= $info['POSTALCODE'] ?>"/>
-							<p class="personalError error" id="postal_error">* Required field</p>
+							<p class="personalError error" id="postalCode_error">* Required field</p>
 							<p class="personalError error" id="postalformat_error">* Invalid postal code</p>
 						</li>					
 					<?php endforeach ?>
