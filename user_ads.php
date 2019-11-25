@@ -31,7 +31,6 @@
   // Sanitize the id that comes with get method from index page.
   $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
-  //$query = "SELECT * FROM adpost WHERE USERID = :id";
     $query = "SELECT a.PostId, a.PostDate, a.Name, a.Price, i.ImageLocation 
                 FROM adpost a 
                 LEFT JOIN image i ON (a.PostId = i.PostId) 

@@ -15,13 +15,28 @@
     include 'php-image-resize-master/lib/ImageResize.php';
     use \Gumlet\ImageResize;
 
+
+
+
 //-------------------------------------------------Process Block----------------------------------------------------------------//
     // Temporary user id before setup login system.
     $userId = $_SESSION['UserId'];
-    $imageId = $_SESSION['ImageId'];
+    //$imageId = $_SESSION['ImageId'];
     $editPostId = $_SESSION['EditPostId'];
     $buyOrSell = 0;
     $newPostId = 0;
+
+    // Selecting categories to create a dynamic category list
+    $query = "SELECT ImageId, ImageLocation
+                FROM image
+                WHERE POSTID = $editPostId";
+
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $images = $statement->fetchall();
+
+    var_dump($images);
+
      
     // Variable flags required for navigation of the code flow.
     $Error_flag  = False;
@@ -101,11 +116,31 @@
         }
 
         
-       
+        if($_POST['removeFile'] == 1)
+        {   
+            
+            $file = 'C:\\xampp\htdocs\WebProject\\'.$images[0][1];
+
+            unlink($file);
+
+            
+            // return to index page 
+           // header("Location: user_ads.php?id=$userId");
+            //exit;
+            // if (!) 
+            // {
+            //     echo ("Error deleting $file");
+            // } 
+            // else 
+            // {
+            //     echo ("Deleted $file");
+            // }
+
+
+        }  
+        
         //-----------------------------------File Upload Block-----------------------------------------------------------//
     
-        if($_POST['uploadFile'] === 'Upload')
-        {
             // file_upload_path() - Safely build a path String that uses slashes appropriate for our OS.
             // Default upload path is an 'images' sub-folder in the current folder.
             function file_upload_path($original_filename, $upload_subfolder_name = 'images') 
@@ -147,8 +182,8 @@
                 {      
                     
 
-                    if($_POST['command'] === 'Create')
-                    {   
+                    //if($_POST['command'] === 'Create')
+                    //{   
 
                     $query = "INSERT INTO image (POSTID, IMAGELOCATION) values (:PostId, :ImageLocation)";
         
@@ -166,22 +201,19 @@
                     $statement->bindValue(':PostId', $insert_id, PDO::PARAM_INT);
                     $statement->execute();
 
-                    }
+                    //}
                     
                     move_uploaded_file($temporary_file_path, $new_file_path);
                     
                     $ResizedFile = new ImageResize($new_file_path);
-                    $ResizedFile->resizeToWidth(400);
-                    $ResizedFile->save(file_upload_path($new_file_path));
-
-                    
+                    $ResizedFile->resizeToWidth(500);
+                    $ResizedFile->save(file_upload_path($new_file_path)); 
                 }
             }        
-        } 
-    
-            // return to index page 
-        header("Location: user_ads.php?id=$userId");
-        exit;
+        
+        // return to index page 
+       // header("Location: user_ads.php?id=$userId");
+        //exit;  
     }
     
     // Array of error mesages 

@@ -131,6 +131,8 @@
 							<li>
 								<label for="uploadFile">Upload Picture</label>
 								<input type="file" name="uploadFile" id="uploadFile" value="Upload">
+                <input type="hidden" name="removeFile" value="0" />
+                <input type="checkbox" name="removeFile" value="1"> Check to delete on update
 							</li>
 
               <li>
