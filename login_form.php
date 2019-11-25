@@ -69,6 +69,7 @@
       <meta charset="UTF-8">
       <title>SoldOut Sell all your staff</title>
       <link rel="stylesheet" type="text/css" href="css/post.css">
+      <script src="JavaScript/loginValidation.js" type="text/javascript"></script>
   </head>
 
   <body>
@@ -88,7 +89,7 @@
                     <a href="registration.php">Register</a>
                     <a href="#">Restore Password</a>  
                     <button type="submit" form="Form" name="command" value="login">Login</button> 
-                    <button type="button">Reset</button>               
+                    <button type="reset"  id="reset" form="Form" name="reset" class="buttonStyle">Reset</button>               
               </div>
       
       <div id="content">
@@ -98,18 +99,18 @@
               <li>
                 <label for="login">login</label>
                 <input type="text" name="login" id="login" />
-                <p class="loginError error" id="login_error">* Required field</p>
+                <p class="personalError error" id="login_error">* Required field</p>
               </li>
 
               <li>
                 <label for="password">Password</label>
                 <input type="text" name="password" id="password" />
-                <p class="loginError error" id="password_error">* Required field</p>
+                <p class="personalError error" id="password_error">* Required field</p>
               </li>
             </ul>
               
               <?php if($errorFlag) :?>
-                <p><?= $errorMessage ?></p>
+                <p class="personalError"><?= $errorMessage ?></p>
               <?php endif ?>
         </form>
           </div>

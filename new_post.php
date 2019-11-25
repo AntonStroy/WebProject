@@ -29,6 +29,7 @@ $categories = $statement->fetchall();
     	<meta charset="UTF-8">
     	<title>SoldOut Sell all your staff</title>
     	<link rel="stylesheet" type="text/css" href="css/post.css">
+    	 <script src="JavaScript/newPostValidation.js" type="text/javascript"></script>
 	</head>
 
 	<body>
@@ -46,7 +47,7 @@ $categories = $statement->fetchall();
             <a href="index.php">Main</a>
             <a href="user_ads.php?id=<?= $_SESSION['UserId'] ?>">My Adds</a>  
             <button type="submit" form="Form" name="command" value="Create">Post</button> 
-            <button type="button">Reset</button>      		     
+            <button type="reset"  id="reset" form="Form" name="reset" class="buttonStyle">Reset</button>      		     
         </div>
 			
 		<div id="content">
@@ -63,16 +64,16 @@ $categories = $statement->fetchall();
                     	<?php endforeach ?>
   						
   						</select>
-  								<p class="categoryError error" id="category_error">* Required field</p>
+  								<p class="personalError error" id="categoryId_error">* Required field</p>
 					</li>
 
 					<li>
 						<label for="itemName">Item Name</label>
 						<input type="text" name="itemName" id="itemName" />
-						<p class="itemNameError error" id="itemName_error">* Required field</p>
+						<p class="personalError error" id="itemName_error">* Required field</p>
 					</li>
 
-					<fieldset id="buyOrSell" class="innerFieldset">
+					<fieldset id="postOption" class="innerFieldset">
 					<legend>Type of Post</legend>
 						<ul>
 							<li>				
@@ -81,28 +82,27 @@ $categories = $statement->fetchall();
 								
 								<input id="sell" name="buyOrSell" value="Sell" type="radio" />
 								<label for="sell">Sell</label>
-								<p class="buyOrSellError error" id="buyOrSell_error">* You must choose post type type</p>	
+								<p class="personalError error" id="postOption_error">* You must provide description</p>	
 							</li>
-						</ul>					
+						</ul>						
 					</fieldset>
 
 					<li>
 						<label for="price">Price</label>
 						<input type="number" step="0.01" name="price" id="price" />
-						<p class="PriceError error" id="Price_error">* Required field</p>
 					</li>
 							
 					<li>
 						<label for="uploadFile">Upload Picture</label>
 						<input type="file" name="uploadFile" id="uploadFile" value="Upload">
 					</li>
-							
-         				<!-- <input type='submit' name='submit' value='Upload File'> -->
+		
 					<li>
 						<br>
 						<label for="description">Item Description</label>
 						<br>
   						<textarea name="description" id="description" rows="10" cols="70"></textarea>
+  						<p class="personalError error" id="description_error">* You mustprovide description</p>
 					</li>							
 				</ul>
 			</form>

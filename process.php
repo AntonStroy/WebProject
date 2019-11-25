@@ -15,9 +15,6 @@
     include 'php-image-resize-master/lib/ImageResize.php';
     use \Gumlet\ImageResize;
 
-
-
-
 //-------------------------------------------------Process Block----------------------------------------------------------------//
     // Temporary user id before setup login system.
     $userId = $_SESSION['UserId'];    

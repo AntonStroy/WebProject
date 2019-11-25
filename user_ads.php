@@ -101,7 +101,6 @@
               <div class = "links">
                 <a href="edit_post.php?PostId=<?= $adPost['PostId'] ?>">Edit</a>
                 <a href="full_post.php?PostId=<?= $adPost['PostId'] ?>">Full Details</a>
-                <a href="process.php?PostId=<?= $adPost['PostId'] ?>">Delete</a>
                 <input type="hidden" name="PostId" value="<?= $PostId ?>" /> 
               </div>
             </div> 
