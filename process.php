@@ -20,23 +20,9 @@
 
 //-------------------------------------------------Process Block----------------------------------------------------------------//
     // Temporary user id before setup login system.
-    $userId = $_SESSION['UserId'];
-    //$imageId = $_SESSION['ImageId'];
-    $editPostId = $_SESSION['EditPostId'];
+    $userId = $_SESSION['UserId'];    
     $buyOrSell = 0;
     $newPostId = 0;
-
-    // Selecting categories to create a dynamic category list
-    $query = "SELECT ImageId, ImageLocation
-                FROM image
-                WHERE POSTID = $editPostId";
-
-    $statement = $db->prepare($query);
-    $statement->execute();
-    $images = $statement->fetchall();
-
-    var_dump($images);
-
      
     // Variable flags required for navigation of the code flow.
     $Error_flag  = False;
@@ -58,6 +44,17 @@
 
     // Sanitize the PostId that comes with post method from edit_post page.
     $PostId      = filter_input(INPUT_POST, 'PostId', FILTER_SANITIZE_NUMBER_INT);
+
+     // Selecting categories to create a dynamic category list
+    $query = "SELECT ImageId, ImageLocation
+                FROM image
+                WHERE POSTID = $PostId";
+
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $images = $statement->fetchall();
+
+    var_dump($images);
     
     // Checking for empty item name or description or item name is over 70 characters. 
     if($_POST['itemName'] === '' || $_POST['description'] === '' ||  strlen($itemName) > 70)
@@ -102,7 +99,8 @@
         // If Update or Delete is used the id required binding.
         if($update_flag || $delete_flag)
         {    
-            $statement->bindValue(':PostId', $PostId, PDO::PARAM_INT);  
+            $statement->bindValue(':PostId', $PostId, PDO::PARAM_INT);
+            $newPostId = $PostId;  
         }
         
         // Execution of the binds
@@ -115,29 +113,18 @@
            $newPostId = $insert_id;
         }
 
-        
-        if($_POST['removeFile'] == 1)
-        {   
-            
+        if(($update_flag && $_POST['removeFile'] == 1) || $delete_flag)
+        {
             $file = 'C:\\xampp\htdocs\WebProject\\'.$images[0][1];
 
             unlink($file);
 
-            
-            // return to index page 
-           // header("Location: user_ads.php?id=$userId");
-            //exit;
-            // if (!) 
-            // {
-            //     echo ("Error deleting $file");
-            // } 
-            // else 
-            // {
-            //     echo ("Deleted $file");
-            // }
-
-
-        }  
+            $query = "DELETE FROM image WHERE IMAGEID = :imageId";
+            $statement = $db->prepare($query);
+            $statement->bindValue(':imageId', $images[0][0], PDO::PARAM_INT);
+            $statement->execute();  
+        }
+        
         
         //-----------------------------------File Upload Block-----------------------------------------------------------//
     
@@ -181,9 +168,9 @@
                 if(file_check($temporary_file_path, $new_file_path)) 
                 {      
                     
-
-                    //if($_POST['command'] === 'Create')
-                    //{   
+                    
+                    if($images == NULL)
+                    {   
 
                     $query = "INSERT INTO image (POSTID, IMAGELOCATION) values (:PostId, :ImageLocation)";
         
@@ -201,8 +188,23 @@
                     $statement->bindValue(':PostId', $insert_id, PDO::PARAM_INT);
                     $statement->execute();
 
-                    //}
-                    
+                    }
+                    elseif($images[0][0] != NULL)
+                    { 
+                        $file = 'C:\\xampp\htdocs\WebProject\\'.$images[0][1];
+                        unlink($file);
+                        
+
+                        $new_file_path = "images/".$images[0][0].".".pathinfo($new_file_path, PATHINFO_EXTENSION); 
+
+                        $query = "UPDATE image SET IMAGELOCATION = :ImageLocation WHERE IMAGEID = :imageId";
+                        
+                        $statement = $db->prepare($query);
+                        $statement->bindValue(':ImageLocation', $new_file_path);
+                        $statement->bindValue(':imageId', $images[0][0], PDO::PARAM_INT);
+                        $statement->execute();
+                    }
+ 
                     move_uploaded_file($temporary_file_path, $new_file_path);
                     
                     $ResizedFile = new ImageResize($new_file_path);
@@ -211,9 +213,17 @@
                 }
             }        
         
-        // return to index page 
-       // header("Location: user_ads.php?id=$userId");
-        //exit;  
+        if($create_flag || $delete_flag)
+        {
+           header("Location: user_ads.php?id=$userId");
+           exit; 
+        }        
+        elseif ($update_flag) 
+        {
+            
+            header("Location: edit_post.php?PostId=$PostId");
+            exit;
+        } 
     }
     
     // Array of error mesages 

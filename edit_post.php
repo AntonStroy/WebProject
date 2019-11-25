@@ -52,8 +52,6 @@
   // Call the date from the database and input it into the variable.
   $info = $statement->fetchAll();
 
-  //$_SESSION['ImageId'] = $info[0][0];
-  $_SESSION['EditPostId'] = $PostId;
 ?>
 		
 <!DOCTYPE html>
@@ -134,11 +132,11 @@
                 <input type="hidden" name="removeFile" value="0" />
                 <input type="checkbox" name="removeFile" value="1"> Check to delete on update
 							</li>
-
+                <?php if($current['ImageId'] != 0): ?>
               <li>
                 <img src="<?= $current['ImageLocation'] ?>" alt="advertisement">
               </li>
-
+                <?php endif ?>
 							<li>
 								<br>
 								<label for="description">Item Description</label>
