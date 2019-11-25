@@ -146,7 +146,7 @@
             <li>
               <label for="categorySelect">Select Category</label>
               <select id="categorySelect" name="categorySelect">
-                <option value="0" selected="selected">Category</option>
+                <option value="0" selected="selected">- Category -</option>
                   <?php foreach($categories as $current): ?>          
                     <option value="<?= $current['CategoryId'] ?>"><?= $current['CategoryName'] ?></option>  
 				          <?php endforeach ?>

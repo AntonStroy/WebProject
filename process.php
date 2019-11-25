@@ -10,69 +10,18 @@
     require 'login.php';
     // using connection.php file to connect to the data base.
     include 'connection.php';
-    session_start();
 
-    //-------------------------------------------------------------File Upload Block------------------------------------------------//
     // Connecting to resize library.
     include 'php-image-resize-master/lib/ImageResize.php';
     use \Gumlet\ImageResize;
 
-    // file_upload_path() - Safely build a path String that uses slashes appropriate for our OS.
-    // Default upload path is an 'images' sub-folder in the current folder.
-    function file_upload_path($original_filename, $upload_subfolder_name = 'images') {
-       $current_folder = dirname(__FILE__);
-       
-       // Build an array of paths segment names to be joins using OS specific slashes.
-       $path_segments = [$current_folder, $upload_subfolder_name, basename($original_filename)];
-       
-       // The DIRECTORY_SEPARATOR constant is OS specific.
-       return join(DIRECTORY_SEPARATOR, $path_segments);
-    }
-    
-    // file_is_an_image() - Checks the mime-type & extension of the uploaded file.
-    function file_check($temporary_path, $new_path) {
-        $allowed_mime_types      = ['image/gif', 'image/jpeg', 'image/png'];
-        $allowed_file_extensions = ['gif', 'jpg', 'jpeg', 'png'];
-        
-        $actual_file_extension   = pathinfo($new_path, PATHINFO_EXTENSION);
-        $actual_mime_type        = getimagesize($temporary_path)['mime'];
-        
-        $file_extension_is_valid = in_array($actual_file_extension, $allowed_file_extensions);
-        $mime_type_is_valid      = in_array($actual_mime_type, $allowed_mime_types);
-        
-        return $file_extension_is_valid && $mime_type_is_valid;
-    }
-
-    $file_upload_detected  = isset($_FILES['uploadFile']) && ($_FILES['uploadFile']['error'] === 0);
-    $upload_error_detected = isset($_FILES['uploadFile']) && ($_FILES['uploadFile']['error'] > 0);
-    
-    if ($file_upload_detected) 
-    { 
-        $filename             = $_FILES['uploadFile']['name'];
-        $temporary_file_path  = $_FILES['uploadFile']['tmp_name'];
-        $new_file_path        = file_upload_path($filename);
-        
-        if(file_check($temporary_file_path, $new_file_path)) 
-        {  
-            move_uploaded_file($temporary_file_path, $new_file_path); 
-           
-            $file = new ImageResize($new_file_path);
-            $file->save(file_upload_path($filename."_.".pathinfo($new_file_path, PATHINFO_EXTENSION)));
-
-            $meduim_file = new ImageResize($new_file_path);
-            $meduim_file->resizeToWidth(400);
-            $meduim_file->save(file_upload_path($filename."_medium.".pathinfo($new_file_path, PATHINFO_EXTENSION)));
-
-            $thumbnail_file = new ImageResize($new_file_path);
-            $thumbnail_file->resizeToWidth(50);
-            $thumbnail_file->save(file_upload_path($filename."_thumbnail.".pathinfo($new_file_path, PATHINFO_EXTENSION)));
-        }
-    }
-
 //-------------------------------------------------Process Block----------------------------------------------------------------//
     // Temporary user id before setup login system.
     $userId = $_SESSION['UserId'];
+    $imageId = $_SESSION['ImageId'];
+    $editPostId = $_SESSION['EditPostId'];
     $buyOrSell = 0;
+    $newPostId = 0;
      
     // Variable flags required for navigation of the code flow.
     $Error_flag  = False;
@@ -148,11 +97,91 @@
         if($create_flag)
         {
            $insert_id = $db->lastInsertId(); 
+           $newPostId = $insert_id;
         }
+
+        
        
-       // return to index page 
-       header('Location: index.php');
-       exit;
+        //-----------------------------------File Upload Block-----------------------------------------------------------//
+    
+        if($_POST['uploadFile'] === 'Upload')
+        {
+            // file_upload_path() - Safely build a path String that uses slashes appropriate for our OS.
+            // Default upload path is an 'images' sub-folder in the current folder.
+            function file_upload_path($original_filename, $upload_subfolder_name = 'images') 
+            {
+                $current_folder = dirname(__FILE__);
+       
+                // Build an array of paths segment names to be joins using OS specific slashes.
+                $path_segments = [$current_folder, $upload_subfolder_name, basename($original_filename)];
+       
+                // The DIRECTORY_SEPARATOR constant is OS specific.
+                return join(DIRECTORY_SEPARATOR, $path_segments);
+            }
+    
+            // file_is_an_image() - Checks the mime-type & extension of the uploaded file.
+            function file_check($temporary_path, $new_path) 
+            {
+                $allowed_mime_types      = ['image/gif', 'image/jpeg', 'image/png'];
+                $allowed_file_extensions = ['gif', 'jpg', 'jpeg', 'png'];
+        
+                $actual_file_extension   = pathinfo($new_path, PATHINFO_EXTENSION);
+                $actual_mime_type        = getimagesize($temporary_path)['mime'];
+        
+                $file_extension_is_valid = in_array($actual_file_extension, $allowed_file_extensions);
+                $mime_type_is_valid      = in_array($actual_mime_type, $allowed_mime_types);
+        
+                return $file_extension_is_valid && $mime_type_is_valid;
+            }
+
+            $file_upload_detected  = isset($_FILES['uploadFile']) && ($_FILES['uploadFile']['error'] === 0);
+            $upload_error_detected = isset($_FILES['uploadFile']) && ($_FILES['uploadFile']['error'] > 0);
+    
+            if ($file_upload_detected) 
+            { 
+                $filename             = $_FILES['uploadFile']['name'];
+                $temporary_file_path  = $_FILES['uploadFile']['tmp_name'];
+                $new_file_path        = file_upload_path($filename);
+        
+                if(file_check($temporary_file_path, $new_file_path)) 
+                {      
+                    
+
+                    if($_POST['command'] === 'Create')
+                    {   
+
+                    $query = "INSERT INTO image (POSTID, IMAGELOCATION) values (:PostId, :ImageLocation)";
+        
+                    $statement = $db->prepare($query);
+                    $statement->bindValue(':PostId', $newPostId);
+                    $statement->bindValue(':ImageLocation', $new_file_path);  
+                    $statement->execute();
+                    $insert_id = $db->lastInsertId();
+
+                    $new_file_path = "images/".$insert_id.".".pathinfo($new_file_path, PATHINFO_EXTENSION);
+
+                    $query = "UPDATE image SET IMAGELOCATION = :ImageLocation WHERE IMAGEID = :PostId";
+                    $statement = $db->prepare($query);
+                    $statement->bindValue(':ImageLocation', $new_file_path);
+                    $statement->bindValue(':PostId', $insert_id, PDO::PARAM_INT);
+                    $statement->execute();
+
+                    }
+                    
+                    move_uploaded_file($temporary_file_path, $new_file_path);
+                    
+                    $ResizedFile = new ImageResize($new_file_path);
+                    $ResizedFile->resizeToWidth(400);
+                    $ResizedFile->save(file_upload_path($new_file_path));
+
+                    
+                }
+            }        
+        } 
+    
+            // return to index page 
+        header("Location: user_ads.php?id=$userId");
+        exit;
     }
     
     // Array of error mesages 
@@ -163,7 +192,7 @@
                 ['error' => $_POST['description'] === '', 'error mesage' => 'Description can\'t be blank'],
 
                 ['error' => strlen($itemName) > 140, 'error mesage' => 'Title can\'t exceed 140 characters']
-            ];
+            ]; 
 ?>
 
 <!DOCTYPE html>

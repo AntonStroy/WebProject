@@ -12,6 +12,17 @@
   include 'connection.php';
 
 
+   // Build a query using ":id" as a placeholder parameter.
+  $query = "SELECT CategoryId, CategoryName
+                FROM category";
+  
+  $statement = $db->prepare($query);
+  //$statement->bindValue(':PostId', $PostId, PDO::PARAM_INT);
+  $statement->execute(); 
+  // Call the date from the database and input it into the variable.
+  $categories = $statement->fetchAll();
+
+
   // function for Validation of the input id.
   function valid_Post_id() 
   {
@@ -29,9 +40,9 @@
   $PostId = filter_input(INPUT_GET, 'PostId', FILTER_SANITIZE_NUMBER_INT);
 
   // Build a query using ":id" as a placeholder parameter.
-  $query = "SELECT a.PostId, a.CategoryId, a.Name, a.Description, a.Price, a.BuyOrSell, a.PostDate, i.ImageLocation 
+  $query = "SELECT i.ImageId, i.ImageLocation, a.PostId, a.CategoryId, a.Name, a.Description, a.Price, a.BuyOrSell, a.PostDate  
                 FROM adpost a 
-                LEFT JOIN image i ON (a.PostId = i.PostId) 
+                LEFT JOIN image i ON (a.PostId = i.PostId)
                 WHERE a.PostId = :PostId";
     
   $statement = $db->prepare($query);
@@ -41,6 +52,8 @@
   // Call the date from the database and input it into the variable.
   $info = $statement->fetchAll();
 
+  //$_SESSION['ImageId'] = $info[0][0];
+  $_SESSION['EditPostId'] = $PostId;
 ?>
 		
 <!DOCTYPE html>
@@ -75,23 +88,16 @@
                 <form id="Form" action="process.php" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="PostId" value="<?= $PostId ?>" />
                     <?php foreach($info as $current): ?>
-					
+					               
                         <legend>New Post</legend>
-                        <ul>
+            <ul>
 							<li>
-								<label for="category">Choose Category</label>
-								<select name="category" id="category">
-    								<option value="0">- category -</option>
-    								<option value="7">BabyItems</option>
-    								<option value="6">Books</option>
-    								<option value="3">Cars</option>
-    								<option value="9">Clothing</option>
-    								<option value="1">Electronics</option>
-    								<option value="4">Furniture</option>
-    								<option value="5">Hobbies</option>
-    								<option value="8">Home Appliances</option>
-    								<option value="10">Pets</option>
-    								<option value="2">Toys</option>
+                <label for="category">Choose Category</label>
+                  <select name="category" id="category">
+                  <option value="0" selected="selected">- Category -</option>
+                  <?php foreach($categories as $category): ?>      
+                    <option value="<?= $category['CategoryId'] ?>" <?php if($current['CategoryId'] == $category['CategoryId'] ) echo 'selected="selected"'; ?>><?= $category['CategoryName'] ?></option>  
+                  <?php endforeach ?>
   								</select>
   								<p class="categoryError error" id="category_error">* Required field</p>
 							</li>
@@ -124,8 +130,12 @@
 							
 							<li>
 								<label for="uploadFile">Upload Picture</label>
-								<input type="file" name="uploadFile" id="uploadFile">
+								<input type="file" name="uploadFile" id="uploadFile" value="Upload">
 							</li>
+
+              <li>
+                <img src="<?= $current['ImageLocation'] ?>" alt="advertisement">
+              </li>
 
 							<li>
 								<br>
