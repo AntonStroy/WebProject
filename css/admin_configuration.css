@@ -26,13 +26,13 @@
 {
 	grid-area: main;
 	margin: 0px auto;
-	width: 1200px;
+	width: 1300px;
 	min-height: 800px;
 }
 
 #topBar
 {
-	width: 1200px;
+	width: 1300px;
 	margin: 0px auto;
 	grid-area: topBar;
 	background: linear-gradient(to bottom, #ffffff 0%, #bfbfbf 100%);

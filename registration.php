@@ -5,7 +5,7 @@
  *  Date: 23/10/2019              *
  *  Purpose:                      *
  **********************************/
-
+ 
 	// using connection.php file to connect to the data base.
     include 'connection.php';
     $errorFlag = False;
@@ -34,6 +34,8 @@
     		$province   = filter_input(INPUT_POST, 'province', 	 FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     		$postalCode = filter_input(INPUT_POST, 'postalCode', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
+    		$saltNpaper = password_hash($password, PASSWORD_DEFAULT);
+
     		$query = "INSERT INTO user (FIRSTNAME, LASTNAME, LOGIN, PASSWORD, PHONENUM, EMAIL, ADDRESS, CITY, PROVINCE, POSTALCODE, ADMIN) values (:firstName, :lastName, :login, :password, :phone, :email, :address, :city, :province, :postalCode, :admin)"; 
     	 
 			$statement = $db->prepare($query);
@@ -41,7 +43,7 @@
             $statement->bindValue(':firstName', $firstName);
             $statement->bindValue(':lastName', $lastName);
             $statement->bindValue(':login', $login);        
-            $statement->bindValue(':password', $password);
+            $statement->bindValue(':password', $saltNpaper);
             $statement->bindValue(':phone', $phone);
             $statement->bindValue(':email', $email);
             $statement->bindValue(':address', $address);        

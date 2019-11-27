@@ -5,7 +5,7 @@
  *  Date: 23/10/2019              *
  *  Purpose:                      *
  **********************************/
-
+ 
     include 'connection.php';
 
     session_start();
@@ -27,33 +27,39 @@
     }
     else
     {
-      
+        
         $query = "SELECT UserId, Login, Password, Admin 
                 FROM user 
-                WHERE Login = :login AND Password = :password";
-
+                WHERE Login = :login";
+      
       $statement = $db->prepare($query);
       $statement->bindValue(':login', $login);        
-      $statement->bindValue(':password', $password);
 
       $statement->execute();
       $rows = $statement->rowCount();
-      $user = $statement->fetchall();
+      $user = $statement->fetch();
       
       //print_r($user);
 
       if($rows == 0) 
       {
-          $errorMessage= "Wrong Passsword or Login";
+          $errorMessage= "Wrong Login";
           $errorFlag  = True;     
       }
       else
       { 
-
-        $_SESSION['UserId'] = $user[0][0];
-        $_SESSION['Login'] = $user[0][1];
-        $_SESSION['Password'] = $user[0][2];
-        $_SESSION['Admin'] = $user[0][3];
+        if($verifiedPassword = password_verify($password, $user['Password']))
+        {
+          $_SESSION['UserId'] = $user['UserId'];
+          $_SESSION['Login'] = $user['Login'];
+          $_SESSION['Password'] = $user['Password'];
+          $_SESSION['Admin'] = $user['Admin'];
+        }
+        else
+        {
+            $errorMessage= "Wrong Password";
+            $errorFlag  = True;
+        }
 
         header('Location:index.php');
         exit;  
