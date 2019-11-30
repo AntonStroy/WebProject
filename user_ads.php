@@ -1,10 +1,11 @@
 <?php
-/**********************************
- *  Name: Anton Stroy             *
- *  Course: WEBD-2006 (186289)    *
- *  Date: 23/10/2019              *
- *  Purpose:                      *
- **********************************/
+/*****************************************
+ *  Name: Anton Stroy                    *
+ *  Course: WEBD-2006 (186289)           *
+ *  Date: 05/12/2019                     *
+ *  Purpose: Page that shows all the     * 
+ *  user's posts.                        *
+ *****************************************/
 
   // Using login.php file for user authentication.
   require 'login.php';
@@ -17,7 +18,7 @@
   // function for Validation of the input id.
   function valid_user_id() 
   {
-    return filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+    return filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT) && $_SESSION['UserId'] === $_GET['id'];
   }
 
   // If validation of input id fails return to the index page
@@ -30,7 +31,7 @@
   // Sanitize the id that comes with get method from index page.
   $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
-  $query = "SELECT a.PostId, a.PostDate, a.Name, a.Price, i.ImageLocation 
+  $query = "SELECT a.UserId, a.PostId, a.PostDate, a.Name, a.Price, i.ImageLocation 
               FROM adpost a 
               LEFT JOIN image i ON (a.PostId = i.PostId) 
               WHERE UserId = :id

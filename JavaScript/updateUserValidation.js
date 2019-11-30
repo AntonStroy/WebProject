@@ -118,7 +118,7 @@ function validateEmail(email)
     return emailPatern.test(String(email).toLowerCase());
 }
 
-// Handles the submit event of the registration form. Return True if no validation errors; False if the form has validation errors
+// Handles the submit event of the update user form. Return True if no validation errors; False if the form has validation errors
 function validate(e)
 {
 	// Hides all errors on the form

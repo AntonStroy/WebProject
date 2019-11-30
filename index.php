@@ -1,10 +1,10 @@
 <?php
-/**********************************
- *  Name: Anton Stroy             *
- *  Course: WEBD-2006 (186289)    *
- *  Date: 23/10/2019              *
- *  Purpose:                      *
- **********************************/
+/***************************************
+ *  Name: Anton Stroy                  *
+ *  Course: WEBD-2006 (186289)         *
+ *  Date: 5/12/2019                    *
+ *  Purpose: Mani page of the website. *  
+ ***************************************/
 
   // Include connection from the connect.php file
   include 'connection.php'; 
@@ -25,11 +25,12 @@
   $statement->execute();
   $categories = $statement->fetchall();  
 
+
   // Part of the code to sort the post set the $sort variable to the one of the sort strings Date, Price or Name
   $sort = 'PostDate';
   if(isset($_GET['sort']))
   {
-    $sort = $_GET['sort'];
+    $sort = filter_input(INPUT_GET, 'sort', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   }
        
   // Variables flags for empty data and printing

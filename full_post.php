@@ -1,10 +1,11 @@
 <?php
-/**********************************
- *  Name: Anton Stroy             *
- *  Course: WEBD-2006 (186289)    *
- *  Date: 23/10/2019              *
- *  Purpose:                      *
- **********************************/
+/************************************************
+ *  Name: Anton Stroy                           *
+ *  Course: WEBD-2006 (186289)                  *
+ *  Date: 5/12/2019                             *
+ *  Purpose: Page with the full description of  *
+ *  the post.                                   *
+ ************************************************/
   
   // Using connection.php file to connect to the data base.
   include 'connection.php';
@@ -146,7 +147,7 @@
             <p><strong><?= $currentInfo['Name'] ?></strong></p>
             <p>Posted On: <?= date('F d, Y', strtotime($currentInfo['PostDate'])) ?></p> 
             <p>Price: $<?= $currentInfo['Price'] ?></p>
-            <p>Description: <?= paragraphs_return($currentInfo['Description']) ?></p>
+            <?=  paragraphs_return("Description: ".$currentInfo['Description']) ?>
           </div>
         </div>
 	    <?php endforeach ?>

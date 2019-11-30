@@ -1,10 +1,11 @@
 <?php
-/**********************************
- *  Name: Anton Stroy             *
- *  Course: WEBD-2006 (186289)    *
- *  Date: 23/10/2019              *
- *  Purpose:                      *
- **********************************/
+/************************************************
+ *  Name: Anton Stroy                           *
+ *  Course: WEBD-2006 (186289)                  *
+ *  Date: 5/12/2019                             *
+ *  Purpose: Edit posts page functionality and  *
+ *  layout without processing to the database.  *
+ ************************************************/
 
   // Using login.php file for user authentication.
   require 'login.php';
@@ -32,7 +33,8 @@
     header('Location: index.php');
     exit;
   }
-
+  
+  $UserId = $_SESSION['UserId'];
   // Sanitize the id that comes with get method from index page.
   $PostId = filter_input(INPUT_GET, 'PostId', FILTER_SANITIZE_NUMBER_INT);
 
@@ -40,10 +42,11 @@
   $query = "SELECT i.ImageId, i.ImageLocation, a.PostId, a.CategoryId, a.Name, a.Description, a.Price, a.BuyOrSell, a.PostDate  
               FROM adpost a 
               LEFT JOIN image i ON (a.PostId = i.PostId)
-               WHERE a.PostId = :PostId";
+               WHERE a.PostId = :PostId AND a.UserId = :UserId";
     
   $statement = $db->prepare($query);
   $statement->bindValue(':PostId', $PostId, PDO::PARAM_INT);
+  $statement->bindValue(':UserId', $UserId, PDO::PARAM_INT);
   $statement->execute(); 
     
   // Call the date from the database and input it into the variable.

@@ -90,7 +90,7 @@
 	border: 1px solid #bfbfbf;
 	width: auto;
 	height: 20px;
-	font-family: "Verdana" sans-serif;
+	font-family: Times;
 	cursor: pointer;
 
 }
@@ -169,9 +169,8 @@
 	border: 1px solid #bfbfbf;
 	width: auto;
 	height: 20px;
-	font-family: "Verdana" sans-serif;
+	font-family: Times;
 	cursor: pointer;
-
 }
 
 #CategoryForm button:hover

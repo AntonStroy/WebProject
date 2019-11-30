@@ -1,10 +1,11 @@
 <?php
-/**********************************
- *  Name: Anton Stroy             *
- *  Course: WEBD-2006 (186289)    *
- *  Date: 23/10/2019              *
- *  Purpose:                      *
- **********************************/
+/***********************************************
+ *  Name: Anton Stroy                          *
+ *  Course: WEBD-2006 (186289)                 *
+ *  Date: 23/10/2019                           *
+ *  Purpose: Page of the configuration         *
+ *  of the category, functionality and layout. *
+ ***********************************************/
 
   // Using login.php file for user authentication.
   require 'login.php'; 

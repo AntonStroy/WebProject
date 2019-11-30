@@ -1,10 +1,11 @@
 <?php
-/**********************************
- *  Name: Anton Stroy             *
- *  Course: WEBD-2006 (186289)    *
- *  Date: 23/10/2019              *
- *  Purpose:                      *
- **********************************/
+/*******************************************
+ *  Name: Anton Stroy                      *
+ *  Course: WEBD-2006 (186289)             *
+ *  Date: 05/12/2019                       *
+ *  Purpose: Page of the registration      *
+ *	form for new users.                    *
+ *******************************************/
 
 	// using connection.php file to connect to the data base.
   include 'connection.php';

@@ -1,10 +1,11 @@
 <?php
-/**********************************
- *  Name: Anton Stroy             *
- *  Course: WEBD-2006 (186289)    *
- *  Date: 23/10/2019              *
- *  Purpose:                      *
- **********************************/
+/**************************************
+ *  Name: Anton Stroy                 *
+ *  Course: WEBD-2006 (186289)        *
+ *  Date: 05/12/2019                  *
+ *  Purpose: Page where users can     *
+ *  login in to the website.          *
+ **************************************/
 
   include 'connection.php';
   session_start();
@@ -117,7 +118,7 @@
           <?php endif ?>
         </form>
       </div>
-
+  
       <div id="rightSide">
         <img src="images/wine.jpg" alt="Wine Advertisement" >
       </div>

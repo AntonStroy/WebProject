@@ -47,7 +47,7 @@ function formFieldHasInput(fieldElement)
 	return true;
 }
 
-// Handles the submit event of the registration form. Return True if no validation errors; False if the form has validation errors
+// Handles the submit event of the login form. Return True if no validation errors; False if the form has validation errors
 function validate(e)
 {
 	// Hides all errors on the form

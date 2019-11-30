@@ -1,10 +1,11 @@
 <?php
-/**********************************
- *  Name: Anton Stroy             *
- *  Course: WEBD-2006 (186289)    *
- *  Date: 23/10/2019              *
- *  Purpose:                      *
- **********************************/
+/************************************************
+ *  Name: Anton Stroy                           *
+ *  Course: WEBD-2006 (186289)                  *
+ *  Date: 5/12/2019                             *
+ *  Purpose: Page of the configuration          *
+ *  of the users, functionality and layout.     *
+ ************************************************/
 
   // using authentication.php file for user authentication.
 	require 'login.php'; 
@@ -90,8 +91,7 @@
       if($create_flag)
       {
         $insert_id = $db->lastInsertId(); 
-      }
-       
+      }      
         // refresh
         header('Location: category_configuration.php');
     }

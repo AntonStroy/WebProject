@@ -1,10 +1,11 @@
 <?php
-/**********************************
- *  Name: Anton Stroy             *
- *  Course: WEBD-2006 (186289)    *
- *  Date: 23/10/2019              *
- *  Purpose:                      *
- **********************************/
+/*****************************************
+ *  Name: Anton Stroy                    *
+ *  Course: WEBD-2006 (186289)           *
+ *  Date: 05/12/2019                     *
+ *  Purpose: Page where user input       *
+ *	information to create a new post.    * 
+ *****************************************/
 
 	// using authentication.php file for user authentication.
 	require 'login.php';
@@ -12,8 +13,8 @@
 	include 'connection.php';
 	// Selecting categories to create a dynamic category list
 	$categories = "SELECT CategoryId, CategoryName
-			        	FROM category
-                ORDER BY CategoryName";
+			        		FROM category
+                	ORDER BY CategoryName";
 
 	$statement = $db->prepare($categories);
 	$statement->execute();
@@ -59,7 +60,7 @@
                     <option value="<?= $category['CategoryId'] ?>"><?= $category['CategoryName'] ?></option>
                   <?php endforeach ?>
   						</select>
-  							<p class="personalError error" id="categoryId_error">* Required field</p>
+  						<p class="personalError error" id="categoryId_error">* Required field</p>
 						</li>
 
 						<li>

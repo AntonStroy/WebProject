@@ -1,6 +1,12 @@
 <?php
+/*******************************************
+ *  Name: Anton Stroy                      *
+ *  Course: WEBD-2006 (186289)             *
+ *  Date: 23/10/2019                       *
+ *  Purpose: Functionality code to         *
+ *  process comment post on the websites.  *
+ *******************************************/
 
-  
   // using authentication.php file for user authentication 
   require 'login.php';
 
@@ -40,7 +46,6 @@
       $insert_id = $db->lastInsertId();
       $returnId = $_SESSION['PostId'];
       header("Location: full_post.php?PostId=$returnId");
-      //exit; 
     }
   }
 ?>
