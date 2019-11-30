@@ -7,51 +7,48 @@
  **********************************/
 
   // Using login.php file for user authentication.
-  require 'login.php';
-  
+  require 'login.php'; 
   // Using connection.php file to connect to the data base.
   include 'connection.php';
-
   // Build a query using ":id" as a placeholder parameter.
   $query = "SELECT CategoryId, CategoryName
-                FROM category";
-  
+              FROM category";
+
   $statement = $db->prepare($query);
-  //$statement->bindValue(':PostId', $PostId, PDO::PARAM_INT);
   $statement->execute(); 
   // Call the date from the database and input it into the variable.
   $categories = $statement->fetchAll();
 
 //--------------------------------------------------------------------------------------//
   
-    $create_flag = False;
-    $update_flag = False;
-    $delete_flag = False;
-    $Error_flag  = False;
-    $flag = '';
+  $create_flag = False;
+  $update_flag = False;
+  $delete_flag = False;
+  $Error_flag  = False;
+  $flag = '';
 
   if(isset($_POST['command']))
   {
     if($_POST['command'] === 'Select')
     {   
-        if($_POST['categorySelect'] == 0)
-        {
-          $flag = 'hide';
-        }
-        else
-        {
-          $flag = 'show';
-          $_SESSION['CategoryId'] =  $_POST['categorySelect'];
-          $id = $_SESSION['CategoryId'];
+      if($_POST['categorySelect'] == 0)
+      {
+        $flag = 'hide';
+      }
+      else
+      {
+        $flag = 'show';
+        $_SESSION['CategoryId'] =  $_POST['categorySelect'];
+        $id = $_SESSION['CategoryId'];
 
-          $query = "SELECT CategoryId, CategoryName
-                FROM category
-                WHERE CATEGORYID = $id";
+        $query = "SELECT CategoryId, CategoryName
+                    FROM category
+                    WHERE CATEGORYID = $id";
   
-          $statement = $db->prepare($query);
-          $statement->execute(); 
-          $display = $statement->fetchAll();
-        }       
+        $statement = $db->prepare($query);
+        $statement->execute(); 
+        $display = $statement->fetchAll();
+      }       
     }
 
     // Sanitize user input to escape HTML entities and filter out dangerous characters.
@@ -60,47 +57,46 @@
     $categoryId = filter_input(INPUT_POST, 'categoryId', FILTER_SANITIZE_NUMBER_INT);
     
     if($_POST['command'] === 'Create')
-      {
-        if($_POST['newCategory'] === '' ||  strlen($newCategory) > 70)
-        {
-          $Error_flag = True; 
-        }
-
-        if(!$Error_flag)
-        {
-          $query = "INSERT INTO category (CATEGORYNAME) values (:newCategory)";
-        
-          $statement = $db->prepare($query);
-          $statement->bindValue(':newCategory', $newCategory);
-          $statement->execute();
-          $insert_id = $db->lastInsertId();
-          header('Location: category_configuration.php');
-        }      
-      }
-
-      // Checking for empty  name is over 70 characters. 
-      if($_POST['category'] === '' ||  strlen($category) > 70)
+    {
+      if($_POST['newCategory'] === '' ||  strlen($newCategory) > 70)
       {
         $Error_flag = True; 
       }
 
-      // Process block
-      if(!$Error_flag)   
-      {       
+      if(!$Error_flag)
+      {
+        $query = "INSERT INTO category (CATEGORYNAME) values (:newCategory)";
+        
+        $statement = $db->prepare($query);
+        $statement->bindValue(':newCategory', $newCategory);
+        $statement->execute();
+        $insert_id = $db->lastInsertId();
+        
+        header('Location: category_configuration.php');
+      }      
+    }
 
-        if($_POST['command'] === 'Update')
-        {
-            $query = "UPDATE category SET CATEGORYNAME = :category WHERE CATEGORYID = :categoryId";
+    // Checking for empty  name is over 70 characters. 
+    if($_POST['category'] === '' ||  strlen($category) > 70)
+    {
+      $Error_flag = True; 
+    }
+
+    if(!$Error_flag)   
+    {       
+      if($_POST['command'] === 'Update')
+      {
+        $query = "UPDATE category SET CATEGORYNAME = :category WHERE CATEGORYID = :categoryId";
            
-            $statement = $db->prepare($query);
-            $statement->bindValue(':category', $category);
-            $statement->bindValue(':categoryId', $categoryId);
-            $statement->bindValue(':categoryId', $categoryId, PDO::PARAM_INT);
-            $statement->execute();
-            header('Location: category_configuration.php');
-        }
-        elseif($_POST['command'] === 'Delete')
-        {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':category', $category);
+        $statement->bindValue(':categoryId', $categoryId);
+        $statement->bindValue(':categoryId', $categoryId, PDO::PARAM_INT);
+        $statement->execute();
+        header('Location: category_configuration.php');
+      }
+      elseif($_POST['command'] === 'Delete')
+      {
         $query = "DELETE FROM category WHERE CATEGORYID = :categoryId";
         $statement = $db->prepare($query);
         $statement->bindValue(':categoryId', $categoryId, PDO::PARAM_INT);
@@ -114,9 +110,9 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-    	<meta charset="UTF-8">
-    	<title>SoldOut Sell all your staff</title>
-    	<link rel="stylesheet" type="text/css" href="css/admin_configuration.css">	
+    <meta charset="UTF-8">
+    <title>SoldOut Sell all your staff</title>
+    <link rel="stylesheet" type="text/css" href="css/admin_configuration.css">	
 	</head>
 	
   <body>
@@ -127,7 +123,7 @@
       </div>
 
       <div id="logoBox">
-        <a href="index.php"><img src="images/Sold_Out.png" alt="logo sold out" height="150px" width="150px" ></a>
+        <a href="index.php"><img src="images/Sold_Out.png" alt="logo sold out" id="logo" ></a>
       </div>
       
       <div id="topBar">
@@ -144,7 +140,7 @@
             </li>
             
             <li>
-              <label for="categorySelect">Select Category</label>
+            <label for="categorySelect">Select Category</label>
               <select id="categorySelect" name="categorySelect">
                 <option value="0" selected="selected">- Category -</option>
                   <?php foreach($categories as $current): ?>          
@@ -183,8 +179,9 @@
           <li><a href="#">Careers</a></li>
           <li><a href="#">Member Benefits</a></li>
           <li><a href="#">Advertise on SoldOut</a></li>
-          <p>copyright &copy; all rights reserved</p>
+          
         </ul>
+        <p>copyright &copy; all rights reserved</p>
       </div>
     </div>
 	</body>

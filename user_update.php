@@ -69,7 +69,7 @@ include 'connection.php';
 			$errorFlag = True;
 		}
 
-		
+		$saltNpaper = password_hash($password, PASSWORD_DEFAULT);
 
 		if($_POST['command'] === "Update")
 		{
@@ -98,7 +98,7 @@ include 'connection.php';
             	$statement->bindValue(':firstName', $firstName);
             	$statement->bindValue(':lastName', $lastName);
            	 	$statement->bindValue(':login', $login);        
-            	$statement->bindValue(':password', $password);
+            	$statement->bindValue(':password', $saltNpaper);
             	$statement->bindValue(':phone', $phone);
             	$statement->bindValue(':email', $email);
             	$statement->bindValue(':address', $address);        

@@ -11,7 +11,6 @@
   // Using connection.php file to connect to the data base.
   include 'connection.php';
 
-
   $error_flag = False;
   $print_flag = False;
 
@@ -31,11 +30,11 @@
   // Sanitize the id that comes with get method from index page.
   $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
-    $query = "SELECT a.PostId, a.PostDate, a.Name, a.Price, i.ImageLocation 
-                FROM adpost a 
-                LEFT JOIN image i ON (a.PostId = i.PostId) 
-                WHERE UserId = :id
-                ORDER BY PostDate";
+  $query = "SELECT a.PostId, a.PostDate, a.Name, a.Price, i.ImageLocation 
+              FROM adpost a 
+              LEFT JOIN image i ON (a.PostId = i.PostId) 
+              WHERE UserId = :id
+              ORDER BY PostDate";
 
   $statement = $db->prepare($query);
   $statement->bindValue(':id', $id, PDO::PARAM_INT);
@@ -45,22 +44,21 @@
   $adPosts = $statement->fetchAll();
 
   if($adPosts == null)
-    {
-        $error_flag = True;
-    }
-    else
-    {
-        $print_flag = True;
-    }
-
+  {
+    $error_flag = True;
+  }
+  else
+  {
+    $print_flag = True;
+  }
 ?>
 		
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-    	<meta charset="UTF-8">
-    	<title>SoldOut Sell all your staff</title>
-    	<link rel="stylesheet" type="text/css" href="css/user_ads.css">
+    <meta charset="UTF-8">
+    <title>SoldOut Sell all your staff</title>
+    <link rel="stylesheet" type="text/css" href="css/user_ads.css">
 		<script src="js/formValidation.js" type="text/javascript"></script>
 	</head>
 
@@ -72,7 +70,7 @@
       </div>
 
       <div id="logoBox">
-        	<img src="images\Sold_Out.png" alt="logo sold out" height="150px" width="150px" >
+        <a href="index.php"><img src="images/Sold_Out.png" alt="logo sold out" id="logo" ></a>
       </div>
         	
       <div id="topBar">
@@ -121,9 +119,9 @@
           <li><a href="#">Careers</a></li>
           <li><a href="#">Member Benefits</a></li>
           <li><a href="#">Advertise on SoldOut</a></li>
-          <p>copyright &copy; all rights reserved</p>
+          
         </ul>
-
+        <p>copyright &copy; all rights reserved</p>
       </div>
     </div>
 	</body>

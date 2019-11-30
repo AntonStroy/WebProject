@@ -22,11 +22,34 @@
 	color: #990000;
 }
 
+#logoBox
+{
+	grid-area: logo;
+	display: grid;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(to bottom, #bfbfbf 0%, #ffffff 100%);
+	min-width: 280px;
+}
+
+#logo
+{
+	width: 150px;
+	height: 150px;
+}
+
 #leftSide 
 { 
 	grid-area: leftSide;
-	list-style-type: none;
-	width: 300px;
+	min-width: 280px;
+}
+
+#leftSide img
+{
+	display: block;
+  	margin-left: auto;
+ 	margin-right: auto;
+ 	width: auto;
 }
 
 .comment 
@@ -36,8 +59,7 @@
 	padding: 10px;
 	margin: 5px;
 	box-shadow: 0px 3px 5px #5f4121;
-	border-radius: 25px;
-	
+	border-radius: 25px;	
 }
 
 .comment p
@@ -49,23 +71,13 @@
 #content
 {
 	grid-area: main;
-	margin: 0px auto;
 	min-height: 800px;
-	width: 1300px;
+	min-width: 1300px;
 }
-
-/*#contentLogin
-{
-	grid-area: main;
-	margin: 0px auto;
-	width: 1200px;
-	min-height: 800px;
-}*/
 
 #topBar
 {
 	min-width: 1300px;
-	margin: 0px auto;
 	grid-area: topBar;
 	background: linear-gradient(to bottom, #ffffff 0%, #bfbfbf 100%);
 	display: grid;
@@ -86,6 +98,8 @@
 	margin: 2px;
 	background: linear-gradient(to bottom, #ffffff 0%, #bfbfbf 100%);
 	border: 1px solid #bfbfbf;
+	font-family: Times;
+	width: auto;
 }
 
 #topBar a:hover
@@ -103,10 +117,10 @@
 	background: linear-gradient(to bottom, #ffffff 0%, #bfbfbf 100%);
 	border: 1px solid #bfbfbf;
 	width: auto;
-	height: 20px;
-	font-family: "Verdana" sans-serif;
+	margin: 2px;
+	font-family: Times;
+	font-size: 12pt;
 	cursor: pointer;
-
 }
 
 #topBar button:hover
@@ -119,6 +133,14 @@
 	background: linear-gradient(to bottom, #bfbfbf 0%, #ffffff 100%);
 }
 
+#Form h2
+{
+	margin-top: 0px;
+	padding-left: 20px;
+	padding-top: 20px;
+}
+
+
 #Form label
 {
 	float: left;
@@ -126,11 +148,18 @@
 	padding: 0px;
 }
 
+#Form ul 
+{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-top: 20px;
+}
+
 #Form ul li
 {
 	list-style:none;
 	color: #261a0d;
-	margin: 10px;
+	margin-bottom: 10px;
 }
 
 .personalError
@@ -141,11 +170,25 @@
 #rightSide
 {
 	grid-area: rightSide;
-	list-style-type: none;
-	width: 300px;
+	min-width: 280px;
 }
 
-#rightSide a
+#rightSide img
+{
+	display: block;
+  	margin-left: auto;
+ 	margin-right: auto;
+ 	width: auto;
+}
+
+#rightSide ul
+{
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+#rightSide ul a
 {
 	background: linear-gradient(to bottom, #ffffff 0%, #bfbfbf 100%);
 	text-decoration: none;
@@ -156,10 +199,9 @@
 	padding: 6px;
 	margin: 0px;
 	font-weight: bold;
-	list-style-type: none;
 }
 
-#rightSide a:hover
+#rightSide ul a:hover
 {
 	color: #990000;
 }

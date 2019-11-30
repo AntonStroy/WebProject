@@ -7,14 +7,13 @@
  **********************************/
 
 #wrapper
-{
-	
+{	
 	display: grid;
 	grid-template-areas:
-	'logo     header header header header header header header'
-    'leftSide topBar topBar topBar topBar topBar topBar rightSide'
-    'leftSide main   main   main   main   main   main   rightSide'
-    'footer footer footer footer footer footer footer footer';
+	'logo     header header header header header header '
+    'leftSide topBar topBar topBar topBar topBar rightSide'
+    'leftSide main   main   main   main   main  rightSide'
+    'footer footer footer footer footer footer footer';
 }
 
 #header  
@@ -34,14 +33,38 @@
 #logoBox
 {
 	grid-area: logo;
+	display: grid;
+	align-items: center;
+	justify-content: center;
 	background: linear-gradient(to bottom, #bfbfbf 0%, #ffffff 100%);
+	min-width: 280px;
 }
 
-#leftSide 
+#logo
+{
+	width: 150px;
+	height: 150px;
+}
+
+#leftSide
 { 
 	grid-area: leftSide;
+	min-width: 280px;
+}
+
+#leftSide img
+{
+	display: block;
+  	margin-left: auto;
+ 	margin-right: auto;
+ 	width: auto;
+}
+
+#leftSide ul 
+{ 
 	list-style-type: none;
-	width: 300px;
+	padding: 0px;
+	margin: 0px;
 }
 
 #leftSide a
@@ -51,7 +74,7 @@
 	text-align: center;
 	text-decoration: none;  
 	display: list-item;
-	padding: 6px;
+	padding: 5.5px;
 	margin: 0px;
 	font-weight: bold;
 }
@@ -67,7 +90,6 @@
 	background: linear-gradient(to bottom, #ffffff 0%, #bfbfbf 100%);
 	display: grid;
 	grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
-	grid-column-gap: 5px;
 	align-content: center;
 	justify-content: left;
 	height: 30px;
@@ -82,10 +104,11 @@
 	text-decoration: none; 
 	padding-right: 5px;
 	padding-left: 5px;
-	margin: 0px;
+	margin: 2px;
 	background: linear-gradient(to bottom, #ffffff 0%, #bfbfbf 100%);
 	border: 1px solid #bfbfbf;
-	font-family: "Verdana" sans-serif; 
+	font-family: Times;
+	width: auto;
 }
 
 #topBar form a:hover
@@ -103,17 +126,16 @@
 	background: linear-gradient(to bottom, #ffffff 0%, #bfbfbf 100%);
 	border: 1px solid #bfbfbf;
 	width: auto;
-	height: 20px;
-	font-family: "Verdana" sans-serif;
+	margin: 2px;
+	font-family: Times;
+	font-size: 12pt;
 	cursor: pointer;
-
 }
 
 #topBar form button:hover
 {
 	color: #990000;
 }
-
 
 #content 
 { 
@@ -124,7 +146,7 @@
 	grid-gap: 5px;
 	padding: 5px;
 	min-height: 800px;
-	min-width: 1300px;	
+	min-width: 1300px;
 }
 
 #content a 
@@ -167,14 +189,29 @@
 	margin-right: 5px;
 }
 
+
 #rightSide
 {
 	grid-area: rightSide;
-	list-style-type: none;
-	width: 300px;
+	min-width: 280px;
 }
 
-#rightSide a
+#rightSide img
+{
+	display: block;
+  	margin-left: auto;
+ 	margin-right: auto;
+ 	width: auto;
+}
+
+#rightSide ul
+{
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+#rightSide ul a
 {
 	background: linear-gradient(to bottom, #ffffff 0%, #bfbfbf 100%);
 	text-decoration: none;
@@ -187,7 +224,7 @@
 	font-weight: bold;
 }
 
-#rightSide a:hover
+#rightSide ul a:hover
 {
 	color: #990000;
 }

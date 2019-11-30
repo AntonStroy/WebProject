@@ -5,14 +5,13 @@
  *  Date: 23/10/2019              *
  *  Purpose:                      *
  **********************************/
- 
-    include 'connection.php';
 
-    session_start();
+  include 'connection.php';
+  session_start();
     
-    $errorFlag  = False;
-    $errorMessage = '';
-    $user = null;
+  $errorFlag  = False;
+  $errorMessage = '';
+  $user = null;
 
   if(isset($_POST['command']))
   {
@@ -27,10 +26,9 @@
     }
     else
     {
-        
-        $query = "SELECT UserId, Login, Password, Admin 
-                FROM user 
-                WHERE Login = :login";
+      $query = "SELECT UserId, Login, Password, Admin 
+                  FROM user 
+                  WHERE Login = :login";
       
       $statement = $db->prepare($query);
       $statement->bindValue(':login', $login);        
@@ -40,7 +38,6 @@
       $user = $statement->fetch();
       
       //print_r($user);
-
       if($rows == 0) 
       {
           $errorMessage= "Wrong Login";
@@ -68,7 +65,6 @@
   }  
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -79,63 +75,68 @@
   </head>
 
   <body>
-      <div id="wrapper">
-          <div id="header">
-              <h1>S o l d   O u t</h1>
-              <h3>Best Canadian online classified advertising service</h3>
-          </div>
+    <div id="wrapper">
+      <div id="header">
+        <h1>S o l d   O u t</h1>
+        <h3>Best Canadian online classified advertising service</h3>
+      </div>
 
-          <div id="logoBox">
-            <img src="images/Sold_Out.png" alt="logo sold out" height="150px" width="150px" >
-          </div>
-          
-          
-              <div id="topBar">
-                    <a href="index.php">Main</a>
-                    <a href="registration.php">Register</a>
-                    <a href="#">Restore Password</a>  
-                    <button type="submit" form="Form" name="command" value="login">Login</button> 
-                    <button type="reset"  id="reset" form="Form" name="reset" class="buttonStyle">Reset</button>               
-              </div>
+      <div id="logoBox">
+        <a href="index.php"><img src="images/Sold_Out.png" alt="logo sold out" id="logo" ></a>
+      </div>
+
+      <div id="leftSide">
+        <img src="images/carAdd.jpg" alt="car Advertisement" >
+      </div>    
+      
+      <div id="topBar">
+        <a href="index.php">Main</a>
+        <a href="registration.php">Register</a>
+        <a href="#">Restore Password</a>  
+        <button type="submit" form="Form" name="command" value="login">Login</button> 
+        <button type="reset"  id="reset" form="Form" name="reset" class="buttonStyle">Reset</button>               
+      </div>
       
       <div id="content">
         <form id="Form" action="login_form.php" method="POST" enctype="multipart/form-data">
-          <legend>Login</legend>
-            <ul>
-              <li>
-                <label for="login">login</label>
-                <input type="text" name="login" id="login" />
-                <p class="personalError error" id="login_error">* Required field</p>
-              </li>
-
-              <li>
-                <label for="password">Password</label>
-                <input type="text" name="password" id="password" />
-                <p class="personalError error" id="password_error">* Required field</p>
-              </li>
-            </ul>
-              
-              <?php if($errorFlag) :?>
-                <p class="personalError"><?= $errorMessage ?></p>
-              <?php endif ?>
+          <h2>Login</h2>
+          <ul>
+            <li>
+              <label for="login">Login</label>
+              <input type="text" name="login" id="login" />
+              <p class="personalError error" id="login_error">* Required field</p>
+            </li>
+            <li>
+              <label for="password">Password</label>
+              <input type="text" name="password" id="password" />
+              <p class="personalError error" id="password_error">* Required field</p>
+            </li>
+          </ul>
+          <?php if($errorFlag) :?>
+            <p class="personalError"><?= $errorMessage ?></p>
+          <?php endif ?>
         </form>
-          </div>
-  
-          <div id="footer">
-                <ul>
-                    <li><a href="#">Terms of Use</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Posting Policy</a></li>
-                    <li><a href="#">Support</a></li>
-                </ul>
-                <ul>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Member Benefits</a></li>
-                    <li><a href="#">Advertise on SoldOut</a></li>
-                </ul>
-                <p>copyright &copy; all rights reserved</p>
-          </div>
       </div>
+
+      <div id="rightSide">
+        <img src="images/wine.jpg" alt="Wine Advertisement" >
+      </div>
+
+      <div id="footer">
+        <ul>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Posting Policy</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Member Benefits</a></li>
+          <li><a href="#">Advertise on SoldOut</a></li>
+        </ul>
+          <p>copyright &copy; all rights reserved</p>
+      </div>
+    </div>
   </body>
 </html>
